@@ -1,21 +1,23 @@
 ﻿
+using phase01;
+
 public class Program
 {
     public static async Task Main()
     {
-        string studentFilePath = Console.ReadLine();
-        string gradesFilePath = Console.ReadLine();
-        var topThreeStuden = await GetTopThreeStudent(studentFilePath, gradesFilePath);
+        var topThreeStuden = await GetTopThreeStudent();
         foreach (var student in topThreeStuden)
         {
             Console.WriteLine(student.ToString());
         }
     }
 
-    public static async Task<IEnumerable<StudentGradeInfo>> GetTopThreeStudent(string studentFilePath, string gradesFilePath)
+    public static async Task<IEnumerable<StudentGradeInfo>> GetTopThreeStudent()
     {
-        var studentList = await Json<Student>.ReadStudentsFromJsonFile(studentFilePath);
-        var gradesList = await Json<Grade>.ReadStudentsFromJsonFile(gradesFilePath);
+        var studentData = new ReadJason<Student>();
+        var gradeData = new ReadJason<Grade>();
+        var studentList = await studentData.Read();
+        var gradesList = await gradeData.Read();
         var topThreeStudent = studentList.GroupJoin(gradesList,
             student => student.StudentNumber,
             grade => grade.StudentNumber,
