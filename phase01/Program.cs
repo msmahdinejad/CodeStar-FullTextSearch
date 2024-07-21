@@ -4,14 +4,21 @@ public class Program
 {
     public static async Task Main()
     {
-        var topThreeStuden = await GetTopThreeStudent();
-        foreach (var student in topThreeStuden)
+        try
         {
-            Console.WriteLine(student.ToString());
+            var topThreeStuden = await GetTopStudent(3);
+            foreach (var student in topThreeStuden)
+            {
+                Console.WriteLine(student.ToString());
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
 
-    public static async Task<IEnumerable<StudentGradeInfo>> GetTopThreeStudent()
+    public static async Task<IEnumerable<StudentGradeInfo>> GetTopStudent(int num)
     {
         var studentData = new JsonReader<Student>();
         var gradeData = new JsonReader<Grade>();
@@ -25,7 +32,7 @@ public class Program
                 FirstName = student.FirstName,
                 LastName = student.LastName,
                 Average = gradeList.Any() ? gradeList.Average(grade => grade.Score) : 0
-            }).OrderByDescending(student => student.Average).Take(3);
+            }).OrderByDescending(student => student.Average).Take(num);
 
         return topThreeStudent;
 
