@@ -1,5 +1,5 @@
 namespace phase01;
-interface IReadData<T>
+interface IDataReader<T>
 {
     Task<List<T>> Read();
 }

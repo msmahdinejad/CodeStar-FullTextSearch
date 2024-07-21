@@ -1,5 +1,4 @@
-﻿
-using phase01;
+﻿using phase01;
 
 public class Program
 {
@@ -14,8 +13,8 @@ public class Program
 
     public static async Task<IEnumerable<StudentGradeInfo>> GetTopThreeStudent()
     {
-        var studentData = new ReadJason<Student>();
-        var gradeData = new ReadJason<Grade>();
+        var studentData = new JsonReader<Student>();
+        var gradeData = new JsonReader<Grade>();
         var studentList = await studentData.Read();
         var gradesList = await gradeData.Read();
         var topThreeStudent = studentList.GroupJoin(gradesList,

@@ -6,8 +6,8 @@ public class StudentGradeInfo
 
     public double Average { get; set; }
 
-     public string ToString()
+    public string ToString()
     {
-        return "FirstName: " + FirstName + " " + "LastName: "+ LastName+" " + "Average: "+ Average;
+        return $"FirstName: {FirstName} LastName: {LastName} Average: {Average}";
     }
 }
