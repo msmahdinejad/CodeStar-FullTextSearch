@@ -4,13 +4,20 @@ public class Program
 {
     public static void Main()
     {
-        var myDoucumentReader = new DocumentReader();
-        myDoucumentReader.RaedFolder();
-        var mySearchController = new SearchController();
-        var word = Console.ReadLine();
-        foreach (var docName in mySearchController.search(word))
+        try
         {
-            Console.WriteLine(docName);
+            var myDoucumentReader = new DocumentReader();
+            myDoucumentReader.RaedFolder();
+            var mySearchController = new SearchController();
+            var word = Console.ReadLine();
+            foreach (var docName in mySearchController.search(word))
+            {
+                Console.WriteLine(docName);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
     }
 }

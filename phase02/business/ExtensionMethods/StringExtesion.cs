@@ -7,8 +7,8 @@ public static class StringExtension
 {
     public static string[] textConverter(this string text)
     {
-        text.ToUpper();
-        text = Regex.Replace(text, @"[^\w\sآ-ی]", "");
+        var textUpperCase = text.ToUpper();
+        text = Regex.Replace(textUpperCase, @"[^\w\sآ-ی]", " ");
         string[] wordList = text.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
         return wordList;
     }

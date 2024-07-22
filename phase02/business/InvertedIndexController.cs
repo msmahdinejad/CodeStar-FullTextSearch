@@ -23,6 +23,7 @@ public class InvertedIndexController
     public void AddTextToMap(string name, string text)
     {
         string[] wordList = text.textConverter();
+
         foreach (var item in wordList)
         {
             if (!invertedeIndex.Words.ContainsKey(item))
