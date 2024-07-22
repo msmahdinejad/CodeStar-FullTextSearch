@@ -3,15 +3,26 @@ using Microsoft.VisualBasic;
 namespace phase02;
 public class InvertedIndexController
 {
+    private static InvertedIndexController _instance;
     public InvertedeIndex invertedeIndex { get; set; }
-    public InvertedIndexController()
+    private InvertedIndexController()
     {
         this.invertedeIndex = new InvertedeIndex();
     }
-
+    public static InvertedIndexController Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new InvertedIndexController();
+            }
+            return _instance;
+        }
+    }
     public void AddTextToMap(string name, string text)
     {
-        string[] wordList = text.FixText();
+        string[] wordList = text.textConverter();
         foreach (var item in wordList)
         {
             if (!invertedeIndex.Words.ContainsKey(item))

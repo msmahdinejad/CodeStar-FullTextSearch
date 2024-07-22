@@ -5,21 +5,20 @@ public class DocumentReader : IDataReader
 {
     public void RaedFolder()
     {
-        var folderPath="Resource.path";//change it:)
+        var folderPath = resources.Resource1.folderPath;
 
-        var files=Directory.GetFiles(folderPath);
+        var files = Directory.GetFiles(folderPath);
         foreach (var file in files)
         {
-            var data=RaedData(file);
-            var name=Path.GetFileName(file);
-            // add func:)))))
+            var data = RaedData(file);
+            var name = Path.GetFileName(file);
+            InvertedIndexController myInvertedIndex = InvertedIndexController.Instance;
+            myInvertedIndex.AddTextToMap(name, data);
         }
     }
 
-    public async Task<string> RaedData(string path)
+    public string RaedData(string path)
     {
-        return await File.ReadAllTextAsync(path);
+        return File.ReadAllText(path);
     }
-
-
 }

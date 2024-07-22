@@ -5,11 +5,11 @@ using System.Text.RegularExpressions;
 namespace phase02;
 public static class StringExtension
 {
-    public static string[] FixText(this string text)
+    public static string[] textConverter(this string text)
     {
         text.ToUpper();
         text = Regex.Replace(text, @"[^\w\sآ-ی]", "");
-        string[] wordList= text.Split(new[] {' ', '\t', '\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
+        string[] wordList = text.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
         return wordList;
     }
 }
