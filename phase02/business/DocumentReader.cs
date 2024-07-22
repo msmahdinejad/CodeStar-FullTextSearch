@@ -3,10 +3,10 @@ using System.Reflection;
 namespace phase02;
 public class DocumentReader : IDataReader
 {
-    InvertedIndexController myInvertedIndex;
+    public InvertedIndexController MyInvertedIndex {get; set;}
     public DocumentReader()
     {
-        this.myInvertedIndex = InvertedIndexController.Instance;
+        this.MyInvertedIndex = InvertedIndexController.Instance;
     }
     public void RaedFolder(string path)
     {
@@ -17,7 +17,7 @@ public class DocumentReader : IDataReader
             var data = RaedData(file);
             var name = Path.GetFileName(file);
 
-            myInvertedIndex.AddTextToMap(name, data);
+            MyInvertedIndex.AddTextToMap(name, data);
         }
 
     }
