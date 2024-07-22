@@ -8,9 +8,9 @@ public class SearchController
     public HashSet<string> NegativeDocumentsResult;
     public Search MySearch {get; set;}
     public InvertedIndexController MyInvertedIndex {get; set;}
-    public SearchController(HashSet<string> UnSignedWords, HashSet<string> PositiveWords, HashSet<string> NegativeWords)
+    public SearchController(HashSet<string> unSignedWords, HashSet<string> positiveWords, HashSet<string> negativeWords)
     {
-        this.MySearch = new Search(UnSignedWords, PositiveWords, NegativeWords);
+        this.MySearch = new Search(unSignedWords, positiveWords, negativeWords);
         this.MyInvertedIndex = InvertedIndexController.Instance;
     }
     public void UnSignedSearch()
