@@ -22,7 +22,7 @@ public class InvertedIndexController
     }
     public void AddTextToMap(string name, string text)
     {
-        string[] wordList = text.textConverter();
+        string[] wordList = text.TextSpliter();
 
         foreach (var item in wordList)
         {

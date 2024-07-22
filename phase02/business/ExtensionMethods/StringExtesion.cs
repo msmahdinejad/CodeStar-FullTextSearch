@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace phase02;
 public static class StringExtension
 {
-    public static string[] textConverter(this string text)
+    public static string[] TextSpliter(this string text)
     {
         var textUpperCase = text.ToUpper();
         text = Regex.Replace(textUpperCase, @"[^\w\sآ-ی]", " ");

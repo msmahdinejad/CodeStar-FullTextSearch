@@ -7,10 +7,11 @@ public class Program
         try
         {
             var myDoucumentReader = new DocumentReader();
-            myDoucumentReader.RaedFolder();
+            var folderPath = resources.Resource1.folderPath;
+            myDoucumentReader.RaedFolder(folderPath);
             var mySearchController = new SearchController();
             var word = Console.ReadLine();
-            foreach (var docName in mySearchController.search(word))
+            foreach (var docName in mySearchController.Search(word))
             {
                 Console.WriteLine(docName);
             }

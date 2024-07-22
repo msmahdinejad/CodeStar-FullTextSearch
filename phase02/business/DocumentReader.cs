@@ -3,18 +3,23 @@ using System.Reflection;
 namespace phase02;
 public class DocumentReader : IDataReader
 {
-    public void RaedFolder()
+    InvertedIndexController myInvertedIndex;
+    public DocumentReader()
     {
-        var folderPath = resources.Resource1.folderPath;
+        this.myInvertedIndex = InvertedIndexController.Instance;
+    }
+    public void RaedFolder(string path)
+    {
 
-        var files = Directory.GetFiles(folderPath);
+        var files = Directory.GetFiles(path);
         foreach (var file in files)
         {
             var data = RaedData(file);
             var name = Path.GetFileName(file);
-            InvertedIndexController myInvertedIndex = InvertedIndexController.Instance;
+
             myInvertedIndex.AddTextToMap(name, data);
         }
+
     }
 
     public string RaedData(string path)

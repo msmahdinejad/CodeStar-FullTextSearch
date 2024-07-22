@@ -3,9 +3,14 @@ namespace phase02;
 
 public class SearchController
 {
-    public HashSet<string> search(string word)
+    InvertedIndexController myInvertedIndex;
+    public SearchController()
     {
-        InvertedIndexController myInvertedIndex = InvertedIndexController.Instance;
+        this.myInvertedIndex = InvertedIndexController.Instance;
+    }
+
+    public HashSet<string> Search(string word)
+    {
         var wordUpperCase = word.ToUpper();
         return myInvertedIndex.invertedeIndex.Words[wordUpperCase];
     }
