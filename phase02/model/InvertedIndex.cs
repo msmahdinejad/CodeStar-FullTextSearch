@@ -1,6 +1,5 @@
 namespace phase02;
 
-
 public class InvertedeIndex
 {
     public Dictionary<string, HashSet<string>> Words { get; init; }

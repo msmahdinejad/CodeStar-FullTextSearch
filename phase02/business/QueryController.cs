@@ -55,10 +55,7 @@ public class QueryController
         FindUnSignWords();
         FindPositiveWords();
         FindNegativeWords();
-        var MySearchController = new SearchController(UnSignedWords, PositiveWords, NegativeWords);
-        return MySearchController.SearchWithQuery();
+        var mySearchController = new SearchController(UnSignedWords, PositiveWords, NegativeWords);
+        return mySearchController.SearchWithQuery();
     }
-
-
-
 }

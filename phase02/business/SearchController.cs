@@ -1,4 +1,3 @@
-
 namespace phase02;
 
 public class SearchController
