@@ -3,27 +3,27 @@ namespace phase02;
 
 public class SearchController
 {
-    public HashSet<string> UnSignedDocumentsResult{get; set;}
-    public HashSet<string> PositiveDocumentsResult{get; set;}
-    public HashSet<string> NegativeDocumentsResult{get; set;}
-    public HashSet<string> FinalResult{get; set;}
-    public Search MySearch {get; init;}
-    public InvertedIndexController MyInvertedIndex {get; init;}
+    public HashSet<string> UnSignedDocumentsResult { get; set; }
+    public HashSet<string> PositiveDocumentsResult { get; set; }
+    public HashSet<string> NegativeDocumentsResult { get; set; }
+    public HashSet<string> FinalResult { get; set; }
+    public Search MySearch { get; init; }
+    public InvertedIndexController MyInvertedIndex { get; init; }
     public SearchController(HashSet<string> unSignedWords, HashSet<string> positiveWords, HashSet<string> negativeWords)
     {
-        this.MySearch = new Search{UnSignedWords = unSignedWords, PositiveWords = positiveWords,NegativeWords = negativeWords};
-        this.MyInvertedIndex = InvertedIndexController.Instance;
+        MySearch = new Search { UnSignedWords = unSignedWords, PositiveWords = positiveWords, NegativeWords = negativeWords };
+        MyInvertedIndex = InvertedIndexController.Instance;
         UnSignedDocumentsResult = new HashSet<string>();
         PositiveDocumentsResult = new HashSet<string>();
         NegativeDocumentsResult = new HashSet<string>();
-        FinalResult = new HashSet<string>();    
+        FinalResult = new HashSet<string>();
     }
     private void UnSignedSearch()
     {
-        if(MySearch.UnSignedWords.Count >= 1)
+        if (MySearch.UnSignedWords.Count >= 1)
         {
             UnSignedDocumentsResult = Search(MySearch.UnSignedWords.First());
-            foreach(var word in MySearch.UnSignedWords)
+            foreach (var word in MySearch.UnSignedWords)
             {
                 UnSignedDocumentsResult.IntersectWith(Search(word));
             }
@@ -31,10 +31,10 @@ public class SearchController
     }
     private void PositiveSearch()
     {
-        if(MySearch.PositiveWords.Count >= 1)
+        if (MySearch.PositiveWords.Count >= 1)
         {
             PositiveDocumentsResult = Search(MySearch.PositiveWords.First());
-            foreach(var word in MySearch.PositiveWords)
+            foreach (var word in MySearch.PositiveWords)
             {
                 PositiveDocumentsResult.UnionWith(Search(word));
             }
@@ -42,10 +42,10 @@ public class SearchController
     }
     private void NegativeSearch()
     {
-        if(MySearch.NegativeWords.Count >= 1)
+        if (MySearch.NegativeWords.Count >= 1)
         {
             NegativeDocumentsResult = Search(MySearch.NegativeWords.First());
-            foreach(var word in MySearch.NegativeWords)
+            foreach (var word in MySearch.NegativeWords)
             {
                 NegativeDocumentsResult.UnionWith(Search(word));
             }
@@ -60,7 +60,7 @@ public class SearchController
             return new HashSet<string>(MyInvertedIndex.MyInvertedIndex.Words[wordUpperCase]);
         }
         catch (KeyNotFoundException)
-        { 
+        {
             return new HashSet<string>();
         }
     }

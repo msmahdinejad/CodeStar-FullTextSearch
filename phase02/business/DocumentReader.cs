@@ -4,16 +4,16 @@ using System.Reflection;
 namespace phase02;
 public class DocumentReader : IDataReader
 {
+    private InvertedIndexController MyInvertedIndex { get; init; }
+    public DocumentReader()
+    {
+        MyInvertedIndex = InvertedIndexController.Instance;
+    }
     private void AddData(string file)
     {
         var data = RaedData(file);
         var name = Path.GetFileName(file);
         MyInvertedIndex.AddTextToMap(name, data);
-    }
-    public InvertedIndexController MyInvertedIndex {get; init;}
-    public DocumentReader()
-    {
-        this.MyInvertedIndex = InvertedIndexController.Instance;
     }
     public void RaedFolder(string path)
     {
@@ -26,14 +26,14 @@ public class DocumentReader : IDataReader
                 AddData(file);
             }
         }
-        catch(FileNotFoundException)
+        catch (FileNotFoundException)
         {
             throw new Exception("Path not found!");
         }
 
     }
 
-    public string RaedData(string path)
+    private string RaedData(string path)
     {
         return File.ReadAllText(path);
     }

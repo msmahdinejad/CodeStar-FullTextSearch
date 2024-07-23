@@ -3,13 +3,13 @@ using Microsoft.VisualBasic;
 namespace phase02;
 public class InvertedIndexController
 {
-    public HashSet<string> AllDocuments {get; init; }
+    public HashSet<string> AllDocuments { get; init; }
     private static InvertedIndexController _instance;
     public InvertedeIndex MyInvertedIndex { get; init; }
     private InvertedIndexController()
     {
-        this.AllDocuments = new HashSet<string>();
-        this.MyInvertedIndex = new InvertedeIndex();
+        AllDocuments = new HashSet<string>();
+        MyInvertedIndex = new InvertedeIndex();
     }
     public static InvertedIndexController Instance
     {
