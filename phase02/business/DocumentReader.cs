@@ -11,13 +11,20 @@ public class DocumentReader : IDataReader
     public void RaedFolder(string path)
     {
 
-        var files = Directory.GetFiles(path);
-        foreach (var file in files)
+        try
         {
-            var data = RaedData(file);
-            var name = Path.GetFileName(file);
+            var files = Directory.GetFiles(path);
+            foreach (var file in files)
+            {
+                var data = RaedData(file);
+                var name = Path.GetFileName(file);
 
-            MyInvertedIndex.AddTextToMap(name, data);
+                MyInvertedIndex.AddTextToMap(name, data);
+            }
+        }
+        catch(FileNotFoundException)
+        {
+            throw new FileNotFoundException("Path not found!");
         }
 
     }

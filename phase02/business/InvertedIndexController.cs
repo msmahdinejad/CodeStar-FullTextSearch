@@ -3,10 +3,12 @@ using Microsoft.VisualBasic;
 namespace phase02;
 public class InvertedIndexController
 {
+    public HashSet<string> AllDocuments;
     private static InvertedIndexController _instance;
     public InvertedeIndex MyInvertedIndex { get; set; }
     private InvertedIndexController()
     {
+        this.AllDocuments = new HashSet<string>();
         this.MyInvertedIndex = new InvertedeIndex();
     }
     public static InvertedIndexController Instance
@@ -35,5 +37,7 @@ public class InvertedIndexController
                 MyInvertedIndex.Words[item].Add(name);
             }
         }
+
+        AllDocuments.Add(name);
     }
 }

@@ -6,12 +6,17 @@ public class SearchController
     public HashSet<string> UnSignedDocumentsResult;
     public HashSet<string> PositiveDocumentsResult;
     public HashSet<string> NegativeDocumentsResult;
+    public HashSet<string> FinalResult;
     public Search MySearch {get; set;}
     public InvertedIndexController MyInvertedIndex {get; set;}
     public SearchController(HashSet<string> unSignedWords, HashSet<string> positiveWords, HashSet<string> negativeWords)
     {
         this.MySearch = new Search(unSignedWords, positiveWords, negativeWords);
         this.MyInvertedIndex = InvertedIndexController.Instance;
+        UnSignedDocumentsResult = new HashSet<string>();
+        PositiveDocumentsResult = new HashSet<string>();
+        NegativeDocumentsResult = new HashSet<string>();
+        FinalResult = new HashSet<string>();    
     }
     public void UnSignedSearch()
     {
@@ -50,15 +55,39 @@ public class SearchController
     public HashSet<string> Search(string word)
     {
         var wordUpperCase = word.ToUpper();
-        return MyInvertedIndex.MyInvertedIndex.Words[wordUpperCase];
+        try
+        {
+            return new HashSet<string>(MyInvertedIndex.MyInvertedIndex.Words[wordUpperCase]);
+        }
+        catch (KeyNotFoundException)
+        { 
+            return new HashSet<string>();
+        }
     }
     public HashSet<string> SearchWithQuery()
     {
         UnSignedSearch();
         PositiveSearch();
         NegativeSearch();
-        UnSignedDocumentsResult.ExceptWith(NegativeDocumentsResult);
-        UnSignedDocumentsResult.IntersectWith(PositiveDocumentsResult);
-        return UnSignedDocumentsResult;
+        if (UnSignedDocumentsResult.Count > 0)
+        {
+            UnSignedDocumentsResult.ExceptWith(NegativeDocumentsResult);
+            if (MySearch.PositiveWords.Count != 0)
+            {
+                UnSignedDocumentsResult.IntersectWith(PositiveDocumentsResult);
+            }
+            FinalResult = UnSignedDocumentsResult;
+        }
+        else if (PositiveDocumentsResult.Count > 0)
+        {
+            PositiveDocumentsResult.ExceptWith(NegativeDocumentsResult);
+            FinalResult = PositiveDocumentsResult;
+        }
+        else if (NegativeDocumentsResult.Count > 0)
+        {
+            FinalResult = new HashSet<string>(MyInvertedIndex.AllDocuments);
+            FinalResult.ExceptWith(NegativeDocumentsResult);
+        }
+        return FinalResult;
     }
 }

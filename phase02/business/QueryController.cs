@@ -31,9 +31,9 @@ public class QueryController
     public void FindPositiveWords(){
         foreach (var word in SplitedText)
         {
-            if(word[0] == '+')
+            if (word[0] == '+')
             {
-                PositiveWords.Add(word);
+                PositiveWords.Add(word.Substring(1));
             }
         }
     }
@@ -42,7 +42,7 @@ public class QueryController
         {
             if(word[0] == '-')
             {
-                NegativeWords.Add(word);
+                NegativeWords.Add(word.Substring(1));
             }
         }
     }

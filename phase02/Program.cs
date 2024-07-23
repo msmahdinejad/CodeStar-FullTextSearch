@@ -13,7 +13,12 @@ public class Program
             {
                 var queryText = Console.ReadLine();
                 var query = new QueryController(queryText);
-                foreach (var docName in query.RunQuery())
+                var result = query.RunQuery();
+                if(result.Count == 0)
+                {
+                    Console.WriteLine("Not found!");
+                }
+                foreach (var docName in result)
                 {
                     Console.WriteLine(docName);
                 }
