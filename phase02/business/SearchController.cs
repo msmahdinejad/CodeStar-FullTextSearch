@@ -11,7 +11,7 @@ public class SearchController
     public InvertedIndexController MyInvertedIndex {get; init;}
     public SearchController(HashSet<string> unSignedWords, HashSet<string> positiveWords, HashSet<string> negativeWords)
     {
-        this.MySearch = new Search(unSignedWords, positiveWords, negativeWords);
+        this.MySearch = new Search{UnSignedWords = unSignedWords, PositiveWords = positiveWords,NegativeWords = negativeWords};
         this.MyInvertedIndex = InvertedIndexController.Instance;
         UnSignedDocumentsResult = new HashSet<string>();
         PositiveDocumentsResult = new HashSet<string>();

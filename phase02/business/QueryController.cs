@@ -10,7 +10,7 @@ public class QueryController
     public string[] SplitedText {get; set;}
     public QueryController(string text)
     {
-        this.MyQuery = new Query(text);
+        this.MyQuery = new Query{Text = text};
         this.UnSignedWords = new HashSet<string>();
         this.PositiveWords = new HashSet<string>();
         this.NegativeWords = new HashSet<string>();
