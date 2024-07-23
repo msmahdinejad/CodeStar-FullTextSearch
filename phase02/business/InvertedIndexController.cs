@@ -3,9 +3,9 @@ using Microsoft.VisualBasic;
 namespace phase02;
 public class InvertedIndexController
 {
-    public HashSet<string> AllDocuments;
+    public HashSet<string> AllDocuments {get; init; }
     private static InvertedIndexController _instance;
-    public InvertedeIndex MyInvertedIndex { get; set; }
+    public InvertedeIndex MyInvertedIndex { get; init; }
     private InvertedIndexController()
     {
         this.AllDocuments = new HashSet<string>();

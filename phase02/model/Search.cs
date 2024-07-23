@@ -3,13 +3,9 @@ namespace phase02;
 
 public class Search
 {
-    public HashSet<string> UnSignedWords {get; set;}
-    public HashSet<string> PositiveWords {get; set;}
-    public HashSet<string> NegativeWords {get; set;}
-    public Search(HashSet<string> UnSignedWords, HashSet<string> PositiveWords, HashSet<string> NegativeWords)
-    {
-        this.UnSignedWords = UnSignedWords;
-        this.PositiveWords = PositiveWords;
-        this.NegativeWords = NegativeWords;
-    }
+    public HashSet<string> UnSignedWords { get; init; }
+    public HashSet<string> PositiveWords { get; init; }
+    public HashSet<string> NegativeWords { get; init; }
+    public Search(HashSet<string> unSignedWords, HashSet<string> positiveWords, HashSet<string> negativeWords)
+    => (UnSignedWords, PositiveWords, NegativeWords) = (unSignedWords, positiveWords, negativeWords);
 }

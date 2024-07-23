@@ -2,12 +2,8 @@ namespace phase02;
 
 public class Query
 {
-    public string Text { get; set; }
+    public string Text { get; init; }
 
-    public Query(string text)
-    {
-        this.Text = text;
-    }
-
+    public Query(string text) => Text = text;
 
 }

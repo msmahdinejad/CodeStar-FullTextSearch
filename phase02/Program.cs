@@ -9,12 +9,12 @@ public class Program
             var myDoucumentReader = new DocumentReader();
             var folderPath = resources.Resource1.folderPath;
             myDoucumentReader.RaedFolder(folderPath);
-            while (true)
+            var queryText = Console.ReadLine();
+            while (queryText != "exit")
             {
-                var queryText = Console.ReadLine();
                 var query = new QueryController(queryText);
                 var result = query.RunQuery();
-                if(result.Count == 0)
+                if (result.Count == 0)
                 {
                     Console.WriteLine("Not found!");
                 }
@@ -22,6 +22,7 @@ public class Program
                 {
                     Console.WriteLine(docName);
                 }
+                queryText = Console.ReadLine();
             }
         }
         catch (Exception ex)

@@ -2,11 +2,11 @@ namespace phase02;
 
 public class QueryController
 {
-    public Query MyQuery {get; set; }
+    public Query MyQuery {get; init; }
 
-    public HashSet<string> UnSignedWords { get; set; }
-    public HashSet<string> PositiveWords { get; set; }
-    public HashSet<string> NegativeWords { get; set; }
+    public HashSet<string> UnSignedWords { get; init; }
+    public HashSet<string> PositiveWords { get; init; }
+    public HashSet<string> NegativeWords { get; init; }
     public string[] SplitedText {get; set;}
     public QueryController(string text)
     {

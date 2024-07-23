@@ -3,12 +3,12 @@ namespace phase02;
 
 public class SearchController
 {
-    public HashSet<string> UnSignedDocumentsResult;
-    public HashSet<string> PositiveDocumentsResult;
-    public HashSet<string> NegativeDocumentsResult;
-    public HashSet<string> FinalResult;
-    public Search MySearch {get; set;}
-    public InvertedIndexController MyInvertedIndex {get; set;}
+    public HashSet<string> UnSignedDocumentsResult{get; set;}
+    public HashSet<string> PositiveDocumentsResult{get; set;}
+    public HashSet<string> NegativeDocumentsResult{get; set;}
+    public HashSet<string> FinalResult{get; set;}
+    public Search MySearch {get; init;}
+    public InvertedIndexController MyInvertedIndex {get; init;}
     public SearchController(HashSet<string> unSignedWords, HashSet<string> positiveWords, HashSet<string> negativeWords)
     {
         this.MySearch = new Search(unSignedWords, positiveWords, negativeWords);

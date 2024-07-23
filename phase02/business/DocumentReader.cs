@@ -1,9 +1,10 @@
+using System.ComponentModel;
 using System.Reflection;
 
 namespace phase02;
 public class DocumentReader : IDataReader
 {
-    public InvertedIndexController MyInvertedIndex {get; set;}
+    public InvertedIndexController MyInvertedIndex {get; init;}
     public DocumentReader()
     {
         this.MyInvertedIndex = InvertedIndexController.Instance;
@@ -24,7 +25,7 @@ public class DocumentReader : IDataReader
         }
         catch(FileNotFoundException)
         {
-            throw new FileNotFoundException("Path not found!");
+            throw new Exception("Path not found!");
         }
 
     }
