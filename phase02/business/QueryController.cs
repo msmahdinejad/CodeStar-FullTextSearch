@@ -15,11 +15,11 @@ public class QueryController
         this.PositiveWords = new HashSet<string>();
         this.NegativeWords = new HashSet<string>();
     }
-    public void TextSpliter()
+    private void TextSpliter()
     {
         this.SplitedText=MyQuery.Text.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
     }
-    public void FindUnSignWords(){
+    private void FindUnSignWords(){
         foreach (var word in SplitedText)
         {
             if(word[0] != '+' && word[0] != '-')
@@ -28,7 +28,7 @@ public class QueryController
             }
         }
     }
-    public void FindPositiveWords(){
+    private void FindPositiveWords(){
         foreach (var word in SplitedText)
         {
             if (word[0] == '+')
@@ -37,7 +37,7 @@ public class QueryController
             }
         }
     }
-    public void FindNegativeWords(){
+    private void FindNegativeWords(){
         foreach (var word in SplitedText)
         {
             if(word[0] == '-')

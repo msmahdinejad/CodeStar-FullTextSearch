@@ -18,7 +18,7 @@ public class SearchController
         NegativeDocumentsResult = new HashSet<string>();
         FinalResult = new HashSet<string>();    
     }
-    public void UnSignedSearch()
+    private void UnSignedSearch()
     {
         if(MySearch.UnSignedWords.Count >= 1)
         {
@@ -29,7 +29,7 @@ public class SearchController
             }
         }
     }
-    public void PositiveSearch()
+    private void PositiveSearch()
     {
         if(MySearch.PositiveWords.Count >= 1)
         {
@@ -40,7 +40,7 @@ public class SearchController
             }
         }
     }
-    public void NegativeSearch()
+    private void NegativeSearch()
     {
         if(MySearch.NegativeWords.Count >= 1)
         {
@@ -52,7 +52,7 @@ public class SearchController
         }
     }
 
-    public HashSet<string> Search(string word)
+    private HashSet<string> Search(string word)
     {
         var wordUpperCase = word.ToUpper();
         try

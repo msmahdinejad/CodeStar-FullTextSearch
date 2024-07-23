@@ -4,6 +4,12 @@ using System.Reflection;
 namespace phase02;
 public class DocumentReader : IDataReader
 {
+    private void AddData(string file)
+    {
+        var data = RaedData(file);
+        var name = Path.GetFileName(file);
+        MyInvertedIndex.AddTextToMap(name, data);
+    }
     public InvertedIndexController MyInvertedIndex {get; init;}
     public DocumentReader()
     {
@@ -17,10 +23,7 @@ public class DocumentReader : IDataReader
             var files = Directory.GetFiles(path);
             foreach (var file in files)
             {
-                var data = RaedData(file);
-                var name = Path.GetFileName(file);
-
-                MyInvertedIndex.AddTextToMap(name, data);
+                AddData(file);
             }
         }
         catch(FileNotFoundException)
