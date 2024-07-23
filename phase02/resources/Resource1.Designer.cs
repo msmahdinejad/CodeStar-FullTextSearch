@@ -61,7 +61,7 @@ namespace phase02.resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\SALEH\Desktop\CodeStar\Summer1403-SE-Team02\phase02\resources\EnglishData.
+        ///   Looks up a localized string similar to resources\EnglishData\.
         /// </summary>
         internal static string folderPath {
             get {

@@ -9,11 +9,20 @@ public class Program
             var myDoucumentReader = new DocumentReader();
             var folderPath = resources.Resource1.folderPath;
             myDoucumentReader.RaedFolder(folderPath);
-            var mySearchController = new SearchController();
-            var word = Console.ReadLine();
-            foreach (var docName in mySearchController.Search(word))
+            var queryText = Console.ReadLine();
+            while (queryText != "exit")
             {
-                Console.WriteLine(docName);
+                var query = new QueryController(queryText);
+                var result = query.RunQuery();
+                if (result.Count == 0)
+                {
+                    Console.WriteLine("Not found!");
+                }
+                foreach (var docName in result)
+                {
+                    Console.WriteLine(docName);
+                }
+                queryText = Console.ReadLine();
             }
         }
         catch (Exception ex)

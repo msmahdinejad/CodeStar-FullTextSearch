@@ -3,11 +3,13 @@ using Microsoft.VisualBasic;
 namespace phase02;
 public class InvertedIndexController
 {
+    public HashSet<string> AllDocuments { get; init; }
     private static InvertedIndexController _instance;
-    public InvertedeIndex invertedeIndex { get; set; }
+    public InvertedeIndex MyInvertedIndex { get; init; }
     private InvertedIndexController()
     {
-        this.invertedeIndex = new InvertedeIndex();
+        AllDocuments = new HashSet<string>();
+        MyInvertedIndex = new InvertedeIndex();
     }
     public static InvertedIndexController Instance
     {
@@ -26,14 +28,16 @@ public class InvertedIndexController
 
         foreach (var item in wordList)
         {
-            if (!invertedeIndex.Words.ContainsKey(item))
+            if (!MyInvertedIndex.Words.ContainsKey(item))
             {
-                invertedeIndex.Words[item] = [name];
+                MyInvertedIndex.Words[item] = [name];
             }
             else
             {
-                invertedeIndex.Words[item].Add(name);
+                MyInvertedIndex.Words[item].Add(name);
             }
         }
+
+        AllDocuments.Add(name);
     }
 }
