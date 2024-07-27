@@ -1,5 +1,5 @@
 namespace phase02;
 public interface ISearch
 {
-    HashSet<ISearchable> SearchWithQuery(Query query);
+    HashSet<ISearchable> MakeResultList(HashSet<string> keyList);
 }

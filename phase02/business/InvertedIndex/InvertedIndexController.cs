@@ -1,7 +1,7 @@
 using Microsoft.VisualBasic;
 
 namespace phase02;
-public class InvertedIndexController
+public class InvertedIndexController : IInvertedIndex
 {
     public HashSet<ISearchable> AllData { get; init; }
     public InvertedIndex MyInvertedIndex { get; init; }

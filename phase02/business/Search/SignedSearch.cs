@@ -1,6 +1,6 @@
 namespace phase02;
 
-public class SignedSearch
+public class SignedSearch : ISearch
 {
     public HashSet<ISearchable> UnSignedResult { get; set; }
     public HashSet<ISearchable> PositiveResult { get; set; }

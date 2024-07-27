@@ -1,6 +1,6 @@
 namespace phase02;
 
-public class SignedSearchStrategy : ISearch
+public class SignedSearchStrategy : ISearchStrategy
 {
     private HashSet<ISearchable> _finalResult { get; set; }
     private SignedSearch _mySignedSearch { get; init; }
