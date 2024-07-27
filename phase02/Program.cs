@@ -9,9 +9,9 @@ public class Program
             var folderPath = Console.ReadLine();
             var className = Console.ReadLine();
             IEnumerable<ISearchable> dataList = null;
-            while(true)
+            while (true)
             {
-                if(FolderReaderFactory.Instance.Map.ContainsKey(className))
+                if (FolderReaderFactory.Instance.Map.ContainsKey(className))
                 {
                     dataList = FolderReaderFactory.Instance.Map[className].RaedFolder(folderPath);
                     break;
@@ -24,7 +24,7 @@ public class Program
             }
             var invertedIndex = new InvertedIndexController();
             invertedIndex.AddDataListToMap(dataList);
-            var searchcontroller = new SearchWithSign(invertedIndex);
+            var searchcontroller = new SignedSearchStrategy(invertedIndex);
             var queryText = Console.ReadLine();
             while (queryText != "exit")
             {

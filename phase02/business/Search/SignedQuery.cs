@@ -1,12 +1,12 @@
 namespace phase02;
 
-public class QueryWithSign : IQuery
+public class SignedQuery : IQuery
 {
     private Query _myQuery { get; init; }
     public HashSet<string> UnSignedWords { get; init; }
     public HashSet<string> PositiveWords { get; init; }
     public HashSet<string> NegativeWords { get; init; }
-    public QueryWithSign(Query query)
+    public SignedQuery(Query query)
     {
         UnSignedWords = new HashSet<string>();
         PositiveWords = new HashSet<string>();

@@ -8,7 +8,7 @@ public class DocumentReader : IFolderReader
     public static DocumentReader Instance => _DocumentReader ??= new DocumentReader();
     public IEnumerable<ISearchable> RaedFolder(string path)
     {
-        var documentsList = new List<Document>(); 
+        var documentsList = new List<Document>();
         try
         {
             var files = Directory.GetFiles(path);
