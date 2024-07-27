@@ -4,6 +4,8 @@ using System.Reflection;
 namespace phase02;
 public class DocumentReader : IFolderReader
 {
+    private static DocumentReader _DocumentReader;
+    public static DocumentReader Instance => _DocumentReader ??= new DocumentReader();
     public IEnumerable<ISearchable> RaedFolder(string path)
     {
         var documentsList = new List<Document>(); 

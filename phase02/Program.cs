@@ -6,11 +6,24 @@ public class Program
     {
         try
         {
-            var myDoucumentReader = new DocumentReader();
-            var folderPath = resources.Resource1.folderPath;
-            var dataList = myDoucumentReader.RaedFolder(folderPath);
+            var folderPath = Console.ReadLine();
+            var className = Console.ReadLine();
+            IEnumerable<ISearchable> dataList = null;
+            while(true)
+            {
+                if(FolderReaderFactory.Instance.Map.ContainsKey(className))
+                {
+                    dataList = FolderReaderFactory.Instance.Map[className].RaedFolder(folderPath);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Class not found!");
+                    className = Console.ReadLine();
+                }
+            }
             var invertedIndex = new InvertedIndexController();
-            invertedIndex.AddListToMap(dataList);
+            invertedIndex.AddDataListToMap(dataList);
             var searchcontroller = new SearchWithSign(invertedIndex);
             var queryText = Console.ReadLine();
             while (queryText != "exit")
@@ -19,7 +32,7 @@ public class Program
                 var result = searchcontroller.SearchWithQuery(query);
                 if (result.Count == 0)
                 {
-                    Console.WriteLine("Not found!");
+                    Console.WriteLine("Key not found!");
                 }
                 foreach (var data in result)
                 {

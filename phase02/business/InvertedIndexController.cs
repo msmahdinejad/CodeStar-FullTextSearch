@@ -4,11 +4,11 @@ namespace phase02;
 public class InvertedIndexController
 {
     public HashSet<ISearchable> AllData { get; init; }
-    public InvertedeIndex MyInvertedIndex { get; init; }
+    public InvertedIndex MyInvertedIndex { get; init; }
     public InvertedIndexController()
     {
         AllData = new HashSet<ISearchable>();
-        MyInvertedIndex = new InvertedeIndex();
+        MyInvertedIndex = new InvertedIndex();
     }
     public void AddDataToMap(ISearchable myData)
     {
@@ -25,7 +25,7 @@ public class InvertedIndexController
         }
         AllData.Add(myData);
     }
-    public void AddListToMap(IEnumerable<ISearchable> dataList)
+    public void AddDataListToMap(IEnumerable<ISearchable> dataList)
     {
         foreach (var data in dataList)
         {

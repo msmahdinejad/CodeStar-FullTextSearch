@@ -2,7 +2,7 @@ namespace phase02;
 
 public class QueryWithSign : IQuery
 {
-    public Query MyQuery { get; init; }
+    private Query _myQuery { get; init; }
     public HashSet<string> UnSignedWords { get; init; }
     public HashSet<string> PositiveWords { get; init; }
     public HashSet<string> NegativeWords { get; init; }
@@ -11,11 +11,11 @@ public class QueryWithSign : IQuery
         UnSignedWords = new HashSet<string>();
         PositiveWords = new HashSet<string>();
         NegativeWords = new HashSet<string>();
-        MyQuery = query;
+        _myQuery = query;
     }
     private void FindUnSignWords()
     {
-        foreach (var word in MyQuery.SplitedText)
+        foreach (var word in _myQuery.SplitedText)
         {
             if (word[0] != '+' && word[0] != '-')
             {
@@ -25,7 +25,7 @@ public class QueryWithSign : IQuery
     }
     private void FindPositiveWords()
     {
-        foreach (var word in MyQuery.SplitedText)
+        foreach (var word in _myQuery.SplitedText)
         {
             if (word[0] == '+')
             {
@@ -35,7 +35,7 @@ public class QueryWithSign : IQuery
     }
     private void FindNegativeWords()
     {
-        foreach (var word in MyQuery.SplitedText)
+        foreach (var word in _myQuery.SplitedText)
         {
             if (word[0] == '-')
             {
@@ -45,7 +45,7 @@ public class QueryWithSign : IQuery
     }
     public void Build()
     {
-        MyQuery.Build();
+        _myQuery.Build();
         FindUnSignWords();
         FindPositiveWords();
         FindNegativeWords();
