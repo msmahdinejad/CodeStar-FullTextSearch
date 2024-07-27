@@ -1,27 +1,21 @@
 namespace phase02;
 
-public class QueryController
+public class QueryWithSign : IQuery
 {
     public Query MyQuery { get; init; }
-
     public HashSet<string> UnSignedWords { get; init; }
     public HashSet<string> PositiveWords { get; init; }
     public HashSet<string> NegativeWords { get; init; }
-    public string[] SplitedText { get; set; }
-    public QueryController(string text)
+    public QueryWithSign(Query query)
     {
-        MyQuery = new Query { Text = text };
         UnSignedWords = new HashSet<string>();
         PositiveWords = new HashSet<string>();
         NegativeWords = new HashSet<string>();
-    }
-    private void TextSpliter()
-    {
-        SplitedText = MyQuery.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        MyQuery = query;
     }
     private void FindUnSignWords()
     {
-        foreach (var word in SplitedText)
+        foreach (var word in MyQuery.SplitedText)
         {
             if (word[0] != '+' && word[0] != '-')
             {
@@ -31,7 +25,7 @@ public class QueryController
     }
     private void FindPositiveWords()
     {
-        foreach (var word in SplitedText)
+        foreach (var word in MyQuery.SplitedText)
         {
             if (word[0] == '+')
             {
@@ -41,7 +35,7 @@ public class QueryController
     }
     private void FindNegativeWords()
     {
-        foreach (var word in SplitedText)
+        foreach (var word in MyQuery.SplitedText)
         {
             if (word[0] == '-')
             {
@@ -49,13 +43,11 @@ public class QueryController
             }
         }
     }
-    public HashSet<string> RunQuery()
+    public void Build()
     {
-        TextSpliter();
+        MyQuery.Build();
         FindUnSignWords();
         FindPositiveWords();
         FindNegativeWords();
-        var mySearchController = new SearchController(UnSignedWords, PositiveWords, NegativeWords);
-        return mySearchController.SearchWithQuery();
     }
 }

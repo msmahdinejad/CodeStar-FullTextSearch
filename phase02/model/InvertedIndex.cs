@@ -2,9 +2,9 @@ namespace phase02;
 
 public class InvertedeIndex
 {
-    public Dictionary<string, HashSet<string>> Words { get; init; }
+    public Dictionary<string, HashSet<ISearchable>> Map { get; init; }
     public InvertedeIndex()
     {
-        Words = new Dictionary<string, HashSet<string>>();
+        Map = new Dictionary<string, HashSet<ISearchable>>();
     }
 }

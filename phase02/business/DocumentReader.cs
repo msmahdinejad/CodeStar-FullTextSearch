@@ -2,35 +2,26 @@ using System.ComponentModel;
 using System.Reflection;
 
 namespace phase02;
-public class DocumentReader : IDataReader
+public class DocumentReader : IFolderReader
 {
-    private InvertedIndexController MyInvertedIndex { get; init; }
-    public DocumentReader()
+    public IEnumerable<ISearchable> RaedFolder(string path)
     {
-        MyInvertedIndex = InvertedIndexController.Instance;
-    }
-    private void AddData(string file)
-    {
-        var data = RaedData(file);
-        var name = Path.GetFileName(file);
-        MyInvertedIndex.AddTextToMap(name, data);
-    }
-    public void RaedFolder(string path)
-    {
-
+        var documentsList = new List<Document>(); 
         try
         {
             var files = Directory.GetFiles(path);
             foreach (var file in files)
             {
-                AddData(file);
+                var data = RaedData(file);
+                var name = Path.GetFileName(file);
+                documentsList.Add(new Document(name, data));
             }
         }
         catch (FileNotFoundException)
         {
             throw new Exception("Path not found!");
         }
-
+        return documentsList;
     }
 
     private string RaedData(string path)

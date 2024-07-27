@@ -3,41 +3,33 @@ using Microsoft.VisualBasic;
 namespace phase02;
 public class InvertedIndexController
 {
-    public HashSet<string> AllDocuments { get; init; }
-    private static InvertedIndexController _instance;
+    public HashSet<ISearchable> AllData { get; init; }
     public InvertedeIndex MyInvertedIndex { get; init; }
-    private InvertedIndexController()
+    public InvertedIndexController()
     {
-        AllDocuments = new HashSet<string>();
+        AllData = new HashSet<ISearchable>();
         MyInvertedIndex = new InvertedeIndex();
     }
-    public static InvertedIndexController Instance
+    public void AddDataToMap(ISearchable myData)
     {
-        get
+        foreach (var key in myData.GetKey())
         {
-            if (_instance == null)
+            if (!MyInvertedIndex.Map.ContainsKey(key))
             {
-                _instance = new InvertedIndexController();
-            }
-            return _instance;
-        }
-    }
-    public void AddTextToMap(string name, string text)
-    {
-        string[] wordList = text.TextSpliter();
-
-        foreach (var item in wordList)
-        {
-            if (!MyInvertedIndex.Words.ContainsKey(item))
-            {
-                MyInvertedIndex.Words[item] = [name];
+                MyInvertedIndex.Map[key] = [myData];
             }
             else
             {
-                MyInvertedIndex.Words[item].Add(name);
+                MyInvertedIndex.Map[key].Add(myData);
             }
         }
-
-        AllDocuments.Add(name);
+        AllData.Add(myData);
+    }
+    public void AddListToMap(IEnumerable<ISearchable> dataList)
+    {
+        foreach (var data in dataList)
+        {
+            AddDataToMap(data);
+        }
     }
 }

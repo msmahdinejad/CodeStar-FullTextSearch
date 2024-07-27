@@ -8,19 +8,22 @@ public class Program
         {
             var myDoucumentReader = new DocumentReader();
             var folderPath = resources.Resource1.folderPath;
-            myDoucumentReader.RaedFolder(folderPath);
+            var dataList = myDoucumentReader.RaedFolder(folderPath);
+            var invertedIndex = new InvertedIndexController();
+            invertedIndex.AddListToMap(dataList);
+            var searchcontroller = new SearchWithSign(invertedIndex);
             var queryText = Console.ReadLine();
             while (queryText != "exit")
             {
-                var query = new QueryController(queryText);
-                var result = query.RunQuery();
+                var query = new Query(queryText);
+                var result = searchcontroller.SearchWithQuery(query);
                 if (result.Count == 0)
                 {
                     Console.WriteLine("Not found!");
                 }
-                foreach (var docName in result)
+                foreach (var data in result)
                 {
-                    Console.WriteLine(docName);
+                    Console.WriteLine(data.GetValue());
                 }
                 queryText = Console.ReadLine();
             }
