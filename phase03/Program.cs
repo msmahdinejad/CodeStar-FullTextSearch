@@ -6,21 +6,22 @@ public class Program
     {
         try
         {
-            var myDoucumentReader = new DocumentReader();
-            var folderPath = resources.Resource1.folderPath;
-            myDoucumentReader.RaedFolder(folderPath);
+            var folderPath = Console.ReadLine();
+            var className = Console.ReadLine();
+            var processor = new Processor(folderPath, className, "SignedSearch");
+            processor.Build();
             var queryText = Console.ReadLine();
             while (queryText != "exit")
             {
-                var query = new QueryController(queryText);
-                var result = query.RunQuery();
+                var query = new Query(queryText);
+                var result = processor.Search(query);
                 if (result.Count == 0)
                 {
-                    Console.WriteLine("Not found!");
+                    Console.WriteLine("Key not found!");
                 }
-                foreach (var docName in result)
+                foreach (var data in result)
                 {
-                    Console.WriteLine(docName);
+                    Console.WriteLine(data.GetValue());
                 }
                 queryText = Console.ReadLine();
             }

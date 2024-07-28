@@ -32,4 +32,15 @@ public class InvertedIndexController : IInvertedIndex
             AddDataToMap(data);
         }
     }
+    public HashSet<ISearchable> GetValue(string word)
+    {
+        if (MyInvertedIndex.Map.ContainsKey(word))
+        {
+            return new HashSet<ISearchable>(MyInvertedIndex.Map[word]);
+        }
+        else
+        {
+            return new HashSet<ISearchable>();
+        }
+    }
 }

@@ -12,4 +12,8 @@ public static class StringExtension
         string[] wordList = text.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
         return wordList;
     }
+    public static string[] QuerySpliter(this string query)
+    {
+        return query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+    }
 }
