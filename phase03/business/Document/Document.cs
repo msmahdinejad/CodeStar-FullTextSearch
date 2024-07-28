@@ -6,10 +6,11 @@ public class Document : ISearchable
     public Document(string docName, string text) => (_text, _docName) = (text, docName);
     public IEnumerable<string> GetKey()
     {
-        return _text.TextSpliter();
+        return TextEditor.Instance.TextSpliter(_text);
     }
     public string GetValue()
     {
         return _docName;
     }
+    
 }

@@ -4,7 +4,7 @@ public class IntersectResultList : ISearchResultList
 {
     private static IntersectResultList _intersectResultList;
     public static IntersectResultList Instance => _intersectResultList ??= new IntersectResultList();
-    public HashSet<ISearchable> MakeResultList(HashSet<string> keyList, InvertedIndexController myInvertedIndex)
+    public HashSet<ISearchable> MakeResultList(HashSet<string> keyList, IInvertedIndex myInvertedIndex)
     {
         HashSet<ISearchable> resultList = new HashSet<ISearchable>();
         if (keyList.Count >= 1)

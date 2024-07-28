@@ -3,27 +3,25 @@ using Microsoft.VisualBasic;
 namespace phase02;
 public class InvertedIndexController : IInvertedIndex
 {
-    public HashSet<ISearchable> AllData { get; init; }
-    public InvertedIndex MyInvertedIndex { get; init; }
+    private Dictionary<string, HashSet<ISearchable>> _map;
+
     public InvertedIndexController()
     {
-        AllData = new HashSet<ISearchable>();
-        MyInvertedIndex = new InvertedIndex();
+        _map = new Dictionary<string, HashSet<ISearchable>>();
     }
     public void AddDataToMap(ISearchable myData)
     {
         foreach (var key in myData.GetKey())
         {
-            if (!MyInvertedIndex.Map.ContainsKey(key))
+            if (!_map.ContainsKey(key))
             {
-                MyInvertedIndex.Map[key] = [myData];
+                _map[key] = [myData];
             }
             else
             {
-                MyInvertedIndex.Map[key].Add(myData);
+                _map[key].Add(myData);
             }
         }
-        AllData.Add(myData);
     }
     public void AddDataListToMap(IEnumerable<ISearchable> dataList)
     {
@@ -34,13 +32,22 @@ public class InvertedIndexController : IInvertedIndex
     }
     public HashSet<ISearchable> GetValue(string word)
     {
-        if (MyInvertedIndex.Map.ContainsKey(word))
+        if (_map.ContainsKey(word))
         {
-            return new HashSet<ISearchable>(MyInvertedIndex.Map[word]);
+            return new HashSet<ISearchable>(_map[word]);
         }
         else
         {
             return new HashSet<ISearchable>();
         }
+    }
+    public HashSet<ISearchable> GetAllValue()
+    {
+        var allValue = new HashSet<ISearchable>();
+        foreach (var value in _map)
+        {
+            allValue.UnionWith(value.Value);
+        }
+        return allValue;
     }
 }

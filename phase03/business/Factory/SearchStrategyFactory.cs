@@ -1,20 +1,11 @@
 namespace phase02;
 public class SearchStrategyFactory : ISearchStrategyFactory
 {
-    private static SearchStrategyFactory _searchStrategyFactory;
-    public static SearchStrategyFactory Instance => _searchStrategyFactory ??= new SearchStrategyFactory();
-    private Dictionary<string, ISearchStrategy> _map { get; set; }
-
-    public ISearchStrategy makeSearchcontroller(InvertedIndexController myInvertedIndex, string searchType)
+    private List<ISearchStrategy> _searchStrategyList { get; set; }
+    public SearchStrategyFactory(List<ISearchStrategy> searchStrategyList) => _searchStrategyList = searchStrategyList;
+    public ISearchStrategy makeSearchcontroller(string searchType)
     {
-        _map = new Dictionary<string, ISearchStrategy>()
-        {
-            {"SignedSearch", new SignedSearchStrategy(myInvertedIndex)}
-        };
-        if (_map.ContainsKey(searchType))
-            return _map[searchType];
-        else
-            throw new Exception("Search Strategy not found!");
-        
+        var strategy = _searchStrategyList.SingleOrDefault(x => x.GetSearchStrategyName() == searchType);
+        return strategy ??throw new Exception("Search Strategy not found!");
     }
 }

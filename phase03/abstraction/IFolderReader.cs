@@ -1,5 +1,6 @@
 namespace phase02;
 public interface IFolderReader
 {
-    IEnumerable<ISearchable> RaedFolder(string path);
+    IEnumerable<ISearchable> ReadFolder(string path);
+    string GetClassName();
 }

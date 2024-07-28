@@ -8,8 +8,13 @@ public class Program
         {
             var folderPath = Console.ReadLine();
             var className = Console.ReadLine();
-            var processor = new Processor(folderPath, className, "SignedSearch");
-            processor.Build();
+
+            var processor = new Processor();
+            processor.Build(folderPath, className, "SignedSearch", 
+            new FolderReaderFactory(new List<IFolderReader>(){new DocumentReader()}), 
+            new InvertedIndexController(), 
+            new SearchStrategyFactory(new List<ISearchStrategy>(){new SignedSearchStrategy()}));
+
             var queryText = Console.ReadLine();
             while (queryText != "exit")
             {

@@ -45,7 +45,6 @@ public class SignedQuery : IQuery
     }
     public void Build()
     {
-        _myQuery.Build();
         FindUnSignWords();
         FindPositiveWords();
         FindNegativeWords();

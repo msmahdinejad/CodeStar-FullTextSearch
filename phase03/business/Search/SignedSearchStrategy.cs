@@ -6,16 +6,18 @@ public class SignedSearchStrategy : ISearchStrategy
     private HashSet<ISearchable> _positiveResult;
     private HashSet<ISearchable> _negativeResult;
     private HashSet<ISearchable> _finalResult;
-    private InvertedIndexController _myInvertedIndex;
-    public SignedSearchStrategy(InvertedIndexController myInvertedIndex)
+    private const string _searchStrategyName = "SignedSearch";
+    public SignedSearchStrategy()
     {
         _unSignedResult = new HashSet<ISearchable>();
         _positiveResult = new HashSet<ISearchable>();
         _negativeResult = new HashSet<ISearchable>();
-        _myInvertedIndex = myInvertedIndex;
         _finalResult = new HashSet<ISearchable>();
     }
-
+    public string GetSearchStrategyName()
+    {
+        return _searchStrategyName;
+    }
     private void HaveUnsignedStrategy(SignedQuery query)
     {
         _unSignedResult.ExceptWith(_negativeResult);
@@ -30,16 +32,16 @@ public class SignedSearchStrategy : ISearchStrategy
         _positiveResult.ExceptWith(_negativeResult);
         _finalResult = _positiveResult;
     }
-    private void HaveNegativeStrategy()
+    private void HaveNegativeStrategy(IInvertedIndex myInvertedIndex)
     {
-        _finalResult = new HashSet<ISearchable>(_myInvertedIndex.AllData);
+        _finalResult = new HashSet<ISearchable>(myInvertedIndex.GetAllValue());
         _finalResult.ExceptWith(_negativeResult);
     }
-    private void Strategy(SignedQuery query)
+    private void Strategy(SignedQuery query, IInvertedIndex myInvertedIndex)
     {
-        _unSignedResult = IntersectResultList.Instance.MakeResultList(query.UnSignedWords, _myInvertedIndex);
-        _positiveResult = UnionResultList.Instance.MakeResultList(query.PositiveWords, _myInvertedIndex);
-        _negativeResult = UnionResultList.Instance.MakeResultList(query.NegativeWords, _myInvertedIndex);
+        _unSignedResult = IntersectResultList.Instance.MakeResultList(query.UnSignedWords, myInvertedIndex);
+        _positiveResult = UnionResultList.Instance.MakeResultList(query.PositiveWords, myInvertedIndex);
+        _negativeResult = UnionResultList.Instance.MakeResultList(query.NegativeWords, myInvertedIndex);
         if (_unSignedResult.Count > 0)
         {
             HaveUnsignedStrategy(query);
@@ -50,14 +52,14 @@ public class SignedSearchStrategy : ISearchStrategy
         }
         else if (_negativeResult.Count > 0)
         {
-            HaveNegativeStrategy();
+            HaveNegativeStrategy(myInvertedIndex);
         }
     }
-    public HashSet<ISearchable> SearchWithQuery(Query inputQuery)
+    public HashSet<ISearchable> SearchWithQuery(Query inputQuery, IInvertedIndex myInvertedIndex)
     {
         SignedQuery query = new SignedQuery(inputQuery);
         query.Build();
-        Strategy(query);
+        Strategy(query, myInvertedIndex);
         return _finalResult;
     }
 }

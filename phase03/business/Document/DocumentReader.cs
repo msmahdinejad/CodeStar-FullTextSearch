@@ -5,8 +5,9 @@ namespace phase02;
 public class DocumentReader : IFolderReader
 {
     private static DocumentReader _DocumentReader;
+    private const string _FolderName = "Document";
     public static DocumentReader Instance => _DocumentReader ??= new DocumentReader();
-    public IEnumerable<ISearchable> RaedFolder(string path)
+    public IEnumerable<ISearchable> ReadFolder(string path)
     {
         var documentsList = new List<Document>();
         try
@@ -25,9 +26,12 @@ public class DocumentReader : IFolderReader
         }
         return documentsList;
     }
-
     private string RaedData(string path)
     {
         return File.ReadAllText(path);
+    }
+    public string GetClassName()
+    {
+        return _FolderName;
     }
 }
