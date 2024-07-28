@@ -1,33 +1,41 @@
-﻿namespace phase02;
+﻿using phase02.resources;
+
+namespace phase02;
 
 public class Program
 {
+    private const string _searchStrategy = "SignedSearch";
+    private const string _className = "Document";
+    private const string _endQuery = "exit";
+    private const string _invalidKeyMessage = "Key Not Found!";
+
+
     public static void Main()
     {
         try
         {
             var folderPath = Console.ReadLine();
-            var className = Console.ReadLine();
-
-            var processor = new Processor();
-            processor.Build(folderPath, className, "SignedSearch", 
-            new FolderReaderFactory(new List<IFolderReader>(){new DocumentReader()}), 
-            new InvertedIndexController(), 
-            new SearchStrategyFactory(new List<ISearchStrategy>(){new SignedSearchStrategy()}));
+            var processor = new Initializer();
+            processor.Build(folderPath, _className, _searchStrategy,
+                new DataFolderReaderFactory(new List<IDataFolderReader>() { new DocumentFolderReader() }),
+                new InvertedIndexController(),
+                new SearchStrategyFactory(new List<ISearchStrategy>() { new SignedSearchStrategy() }));
 
             var queryText = Console.ReadLine();
-            while (queryText != "exit")
+            while (queryText != _endQuery)
             {
                 var query = new Query(queryText);
                 var result = processor.Search(query);
                 if (result.Count == 0)
                 {
-                    Console.WriteLine("Key not found!");
+                    Console.WriteLine(_invalidKeyMessage);
                 }
+
                 foreach (var data in result)
                 {
                     Console.WriteLine(data.GetValue());
                 }
+
                 queryText = Console.ReadLine();
             }
         }

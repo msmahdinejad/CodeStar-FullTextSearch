@@ -1,13 +1,17 @@
 using System.ComponentModel;
 using System.Reflection;
+using phase02.Exceptions;
+using phase02.resources;
 
 namespace phase02;
-public class DocumentReader : IFolderReader
+
+public class DocumentFolderReader : IDataFolderReader
 {
-    private static DocumentReader _DocumentReader;
+    private static DocumentFolderReader _documentFolderReader;
     private const string _FolderName = "Document";
-    public static DocumentReader Instance => _DocumentReader ??= new DocumentReader();
-    public IEnumerable<ISearchable> ReadFolder(string path)
+    public static DocumentFolderReader Instance => _documentFolderReader ??= new DocumentFolderReader();
+
+    public IEnumerable<ISearchable> ReadDataListFromFolder(string path)
     {
         var documentsList = new List<Document>();
         try
@@ -22,14 +26,17 @@ public class DocumentReader : IFolderReader
         }
         catch (FileNotFoundException)
         {
-            throw new Exception("Path not found!");
+            throw new InvalidFolderPath();
         }
+
         return documentsList;
     }
+
     private string RaedData(string path)
     {
         return File.ReadAllText(path);
     }
+
     public string GetClassName()
     {
         return _FolderName;

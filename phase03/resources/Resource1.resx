@@ -120,4 +120,13 @@
   <data name="folderPath" xml:space="preserve">
     <value>resources\EnglishData\</value>
   </data>
+  <data name="InvalidFolderPathMessage" xml:space="preserve">
+    <value>Path Not Found!</value>
+  </data>
+  <data name="InvalidSearchStrategyMessage" xml:space="preserve">
+    <value>Search Strategy Not Found!</value>
+  </data>
+  <data name="InvalidClassNameMessage" xml:space="preserve">
+    <value>Class Not Found!</value>
+  </data>
 </root>
