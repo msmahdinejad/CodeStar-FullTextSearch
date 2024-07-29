@@ -7,9 +7,11 @@ namespace phase02;
 
 public class DocumentFolderReader : IDataFolderReader
 {
+    
     private static DocumentFolderReader _documentFolderReader;
-    private const string _FolderName = "Document";
     public static DocumentFolderReader Instance => _documentFolderReader ??= new DocumentFolderReader();
+
+    public DataType DataType => DataType.Document;
 
     public IEnumerable<ISearchable> ReadDataListFromFolder(string path)
     {
@@ -35,10 +37,5 @@ public class DocumentFolderReader : IDataFolderReader
     private string RaedData(string path)
     {
         return File.ReadAllText(path);
-    }
-
-    public string GetClassName()
-    {
-        return _FolderName;
     }
 }

@@ -4,31 +4,29 @@ namespace phase02;
 
 public class Program
 {
-    private const string _searchStrategy = "SignedSearch";
-    private const string _className = "Document";
-    private const string _endQuery = "exit";
-    private const string _invalidKeyMessage = "Key Not Found!";
-
+    private const string EndQuery = "Exit";
+    private const string InvalidKeyMessage = "Key not found!";
 
     public static void Main()
     {
         try
         {
             var folderPath = Console.ReadLine();
-            var processor = new Initializer();
-            processor.Build(_className, folderPath, _searchStrategy,
-                new DataFolderReaderFactory(new List<IDataFolderReader>() { new DocumentFolderReader() }),
+            var processor = new SearchInitializer(new DataFolderReaderFactory([new DocumentFolderReader()]),
                 new InvertedIndexController(),
-                new SearchStrategyFactory(new List<ISearchStrategy>() { new SignedSearchStrategy() }));
+                new SearchStrategyFactory([new SignedSearchStrategy()], new SignedSearchStrategy()),
+                new SignedSearchStrategy());
+            processor.Build(DataType.Document, folderPath, SearchStrategyType.SignedSearch
+            );
 
             var queryText = Console.ReadLine();
-            while (queryText != _endQuery)
+            while (queryText != EndQuery)
             {
                 var query = new Query(queryText);
                 var result = processor.Search(query);
                 if (result.Count == 0)
                 {
-                    Console.WriteLine(_invalidKeyMessage);
+                    Console.WriteLine(InvalidKeyMessage);
                 }
 
                 foreach (var data in result)

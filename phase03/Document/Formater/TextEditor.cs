@@ -7,12 +7,15 @@ public class TextEditor
 {
     private static TextEditor _textEditor;
     public static TextEditor Instance => _textEditor ??= new TextEditor();
-    private const string regexFormat = @"[^\w\sآ-ی]";
+    private readonly string regexFormat = @"[^\w\sآ-ی]";
+    private readonly char[] WhitespaceCharacters = { ' ', '\t', '\n', '\r' };
+
+    
     public string[] TextSpliter(string text)
     {
         var textUpperCase = text.ToUpper();
         text = Regex.Replace(textUpperCase, regexFormat, " ");
-        string[] wordList = text.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] wordList = text.Split(WhitespaceCharacters, StringSplitOptions.RemoveEmptyEntries);
         return wordList;
     }
 }

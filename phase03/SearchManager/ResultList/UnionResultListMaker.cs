@@ -7,14 +7,12 @@ public class UnionResultListMaker : IResultListMaker
 
     public HashSet<ISearchable> MakeResultList(HashSet<string> keyList, IInvertedIndex myInvertedIndex)
     {
-        HashSet<ISearchable> resultList = new HashSet<ISearchable>();
-        if (keyList.Count >= 1)
-        {
-            resultList = keyList
-                .SelectMany(word => myInvertedIndex.GetValue(word))
-                .ToHashSet();
-        }
+        var resultList = new HashSet<ISearchable>();
+        
+        if (keyList.Count < 1) return resultList;
 
-        return resultList;
+        return keyList
+            .SelectMany(myInvertedIndex.GetValue)
+            .ToHashSet();
     }
 }

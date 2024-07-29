@@ -9,17 +9,13 @@ public class IntersectResultListMaker : IResultListMaker
     {
         HashSet<ISearchable> resultList = new HashSet<ISearchable>();
 
-        if (keyList.Count >= 1)
+        if (keyList.Count < 1) return resultList;
+
+        resultList = myInvertedIndex.GetValue(keyList.First());
+
+        foreach (var word in keyList)
         {
-            resultList = keyList
-                .Skip(1)
-                .Aggregate(
-                    new HashSet<ISearchable>(myInvertedIndex.GetValue(keyList.First())),
-                    (currentSet, word) =>
-                    {
-                        currentSet.IntersectWith(myInvertedIndex.GetValue(word));
-                        return currentSet;
-                    });
+            resultList.IntersectWith(myInvertedIndex.GetValue(word));
         }
 
         return resultList;

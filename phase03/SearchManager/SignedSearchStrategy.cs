@@ -6,7 +6,8 @@ public class SignedSearchStrategy : ISearchStrategy
     private HashSet<ISearchable> _positiveResult;
     private HashSet<ISearchable> _negativeResult;
     private HashSet<ISearchable> _finalResult;
-    private const string _searchStrategyName = "SignedSearch";
+    public SearchStrategyType SearchStrategyName => SearchStrategyType.SignedSearch;
+    
 
     public SignedSearchStrategy()
     {
@@ -18,7 +19,7 @@ public class SignedSearchStrategy : ISearchStrategy
 
     public string GetSearchStrategyName()
     {
-        return _searchStrategyName;
+        return SearchStrategyName.ToString();
     }
 
     private void HaveUnsignedStrategy(SignedQueryBuilder queryBuilder)
@@ -62,6 +63,7 @@ public class SignedSearchStrategy : ISearchStrategy
             HaveNegativeStrategy(myInvertedIndex);
         }
     }
+    
 
     public HashSet<ISearchable> SearchWithQuery(Query inputQuery, IInvertedIndex myInvertedIndex)
     {
