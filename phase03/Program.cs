@@ -16,7 +16,7 @@ public class Program
         {
             var folderPath = Console.ReadLine();
             var processor = new Initializer();
-            processor.Build(folderPath, _className, _searchStrategy,
+            processor.Build(_className, folderPath, _searchStrategy,
                 new DataFolderReaderFactory(new List<IDataFolderReader>() { new DocumentFolderReader() }),
                 new InvertedIndexController(),
                 new SearchStrategyFactory(new List<ISearchStrategy>() { new SignedSearchStrategy() }));

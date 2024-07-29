@@ -4,7 +4,7 @@ public class Initializer : IInitializer
 {
     private ISearchStrategy _searchcontroller;
     private IInvertedIndex _invertedIndex;
-    public void Build(string className, string folderPath, string searchType, DataFolderReaderFactory inputDataFolderReaderFactory, IInvertedIndex inputInvertedIndex, SearchStrategyFactory inputSearchStrategyFactory)
+    public void Build(string className, string folderPath, string searchType, IDataFolderReaderFactory inputDataFolderReaderFactory, IInvertedIndex inputInvertedIndex, ISearchStrategyFactory inputSearchStrategyFactory)
     {
         
         var dataList = inputDataFolderReaderFactory.ReadDataListFromFolder(className).ReadDataListFromFolder(folderPath);

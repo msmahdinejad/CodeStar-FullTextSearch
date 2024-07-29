@@ -2,6 +2,6 @@
 
 public interface IInitializer
 {
-    void Build(string className, string folderPath, string searchType, DataFolderReaderFactory inputDataFolderReaderFactory, IInvertedIndex inputInvertedIndex, SearchStrategyFactory inputSearchStrategyFactory);
+    void Build(string className, string folderPath, string searchType, IDataFolderReaderFactory inputDataFolderReaderFactory, IInvertedIndex inputInvertedIndex, ISearchStrategyFactory inputSearchStrategyFactory);
     HashSet<ISearchable> Search(Query query);
 }
