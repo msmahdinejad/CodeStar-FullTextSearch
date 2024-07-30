@@ -1,0 +1,9 @@
+﻿namespace phase02.QueryModel;
+
+public class Query
+{
+    public string Text { get; init; }
+    public string[] SplitedText => Text.ToUpper().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+    public Query(string text) => Text = text;
+
+}
