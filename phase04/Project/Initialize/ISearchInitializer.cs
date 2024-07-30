@@ -7,6 +7,6 @@ namespace phase02.Initialize;
 public interface ISearchInitializer
 {
     void Build(DataType className, string folderPath, SearchStrategyType searchType);
-    HashSet<ISearchable> Search(Query query);
+    HashSet<ISearchable> Search(IQuery query);
     
 }

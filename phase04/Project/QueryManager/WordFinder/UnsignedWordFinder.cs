@@ -12,9 +12,9 @@ public class UnsignedWordFinder : IWordFinder
     private const char NegativeChar = '-';
 
 
-    public HashSet<string> FindWords(Query query)
+    public HashSet<string> FindWords(string[] words)
     {
-        var result = query.SplitedText
+        var result = words
             .Where(word => word[0] != PositiveChar && word[0] != NegativeChar)
             .ToHashSet();
 

@@ -18,4 +18,5 @@ public class UnionResultListMaker : IResultListMaker
             .SelectMany(myInvertedIndex.GetValue)
             .ToHashSet();
     }
+    
 }

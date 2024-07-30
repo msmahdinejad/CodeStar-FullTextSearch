@@ -1,6 +1,6 @@
 ﻿namespace phase02.QueryModel;
 
-public class Query
+public class Query : IQuery
 {
     public string Text { get; init; }
     public string[] SplitedText => Text.ToUpper().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);

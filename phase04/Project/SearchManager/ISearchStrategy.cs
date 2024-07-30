@@ -7,5 +7,5 @@ namespace phase02.SearchManager;
 public interface ISearchStrategy
 {
     SearchStrategyType SearchStrategyName { get; }
-    HashSet<ISearchable> SearchWithQuery(Query inputQuery, IInvertedIndex myInvertedIndex);
+    HashSet<ISearchable> SearchWithQuery(IQuery inputQuery, IInvertedIndex myInvertedIndex);
 }

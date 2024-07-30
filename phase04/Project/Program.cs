@@ -1,4 +1,5 @@
 ﻿using phase02.Document;
+using phase02.Document.Formater;
 using phase02.Factory.FolderFactory;
 using phase02.Factory.SearchFactory;
 using phase02.Initialize;
@@ -22,7 +23,8 @@ public class Program
             var processor = new SearchInitializer(new DataFolderReaderFactory([new DocumentFolderReader()]),
                 new InvertedIndexController(),
                 new SearchStrategyFactory([new SignedSearchStrategy()], new SignedSearchStrategy()),
-                new SignedSearchStrategy());
+                new SignedSearchStrategy(),
+                new DocumentTextEditor());
             processor.Build(DataType.Document, folderPath, SearchStrategyType.SignedSearch
             );
 

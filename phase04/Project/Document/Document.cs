@@ -2,19 +2,15 @@ using phase02.Document.Formater;
 
 namespace phase02.Document;
 
-public class Document : ISearchable
+public class Document(string docName, string text, ITextEditor _textEditor) : ISearchable
 {
-    private string _text;
-    private string _docName;
-    public Document(string docName, string text) => (_text, _docName) = (text, docName);
-
     public IEnumerable<string> GetKey()
     {
-        return TextEditor.Instance.TextSpliter(_text);
+        return _textEditor.TextSplitter(text);
     }
 
     public string GetValue()
     {
-        return _docName;
+        return docName;
     }
 }

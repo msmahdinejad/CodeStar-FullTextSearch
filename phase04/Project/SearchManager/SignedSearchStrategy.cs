@@ -71,7 +71,7 @@ public class SignedSearchStrategy : ISearchStrategy
     }
     
 
-    public HashSet<ISearchable> SearchWithQuery(Query inputQuery, IInvertedIndex myInvertedIndex)
+    public HashSet<ISearchable> SearchWithQuery(IQuery inputQuery, IInvertedIndex myInvertedIndex)
     {
         SignedQueryBuilder queryBuilder = new SignedQueryBuilder();
         queryBuilder.Build(inputQuery);

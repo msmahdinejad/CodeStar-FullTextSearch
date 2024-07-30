@@ -16,10 +16,10 @@ public class SignedQueryBuilder : IQueryBuilder
         NegativeWords = new HashSet<string>();
     }
 
-    public void Build(Query query)
+    public void Build(IQuery query)
     {
-        UnSignedWords = UnsignedWordFinder.Instance.FindWords(query);
-        PositiveWords = PositiveWordFinder.Instance.FindWords(query);
-        NegativeWords = NegativeWordFinder.Instance.FindWords(query);
+        UnSignedWords = UnsignedWordFinder.Instance.FindWords(query.SplitedText);
+        PositiveWords = PositiveWordFinder.Instance.FindWords(query.SplitedText);
+        NegativeWords = NegativeWordFinder.Instance.FindWords(query.SplitedText);
     }
 }

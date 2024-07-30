@@ -9,9 +9,9 @@ public class PositiveWordFinder : IWordFinder
     private const char PositiveChar = '+';
 
 
-    public HashSet<string> FindWords(Query query)
+    public HashSet<string> FindWords(string[] words)
     {
-        var result = query.SplitedText
+        var result = words
             .Where(word => word[0] == PositiveChar)
             .Select(word => word.Substring(1))
             .ToHashSet();

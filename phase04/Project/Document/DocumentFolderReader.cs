@@ -1,26 +1,32 @@
+using phase02.Document.Formater;
 using phase02.Exceptions;
+using phase02.Utility;
+using phase02.Utility.Abstractions;
 
 namespace phase02.Document;
 
 public class DocumentFolderReader : IDataFolderReader
 {
-    
-    private static DocumentFolderReader _documentFolderReader;
-    public static DocumentFolderReader Instance => _documentFolderReader ??= new DocumentFolderReader();
+    public IFileDirectoryUtility FileDirectoryUtility { get; set; }
+
+    public DocumentFolderReader()
+    {
+        FileDirectoryUtility = new FileDirectoryUtility();
+    }
 
     public DataType DataType => DataType.Document;
 
-    public IEnumerable<ISearchable> ReadDataListFromFolder(string path)
+    public IEnumerable<ISearchable> ReadDataListFromFolder(string path, ITextEditor textEditor)
     {
         var documentsList = new List<Document>();
         try
         {
-            var files = Directory.GetFiles(path);
-            foreach (var file in files)
+            var filesPath = FileDirectoryUtility.GetFiles(path);
+            foreach (var filePath in filesPath)
             {
-                var data = RaedData(file);
-                var name = Path.GetFileName(file);
-                documentsList.Add(new Document(name, data));
+                var data = FileDirectoryUtility.ReadAllText(filePath);
+                var name = FileDirectoryUtility.GetFileName(filePath);
+                documentsList.Add(new Document(name, data, textEditor));
             }
         }
         catch (FileNotFoundException)
@@ -30,9 +36,5 @@ public class DocumentFolderReader : IDataFolderReader
 
         return documentsList;
     }
-
-    private string RaedData(string path)
-    {
-        return File.ReadAllText(path);
-    }
+    
 }

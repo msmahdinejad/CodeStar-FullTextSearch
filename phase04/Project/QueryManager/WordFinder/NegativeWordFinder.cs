@@ -8,9 +8,9 @@ public class NegativeWordFinder : IWordFinder
     public static NegativeWordFinder Instance => _negativeWordFinder ??= new NegativeWordFinder();
     private const char NegativeChar = '-';
 
-    public HashSet<string> FindWords(Query query)
+    public HashSet<string> FindWords(string[] words)
     {
-        var result = query.SplitedText
+        var result = words
             .Where(word => word[0] == NegativeChar)
             .Select(word => word.Substring(1))
             .ToHashSet();
