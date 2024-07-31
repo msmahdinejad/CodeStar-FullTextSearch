@@ -4,8 +4,10 @@ using phase02.Factory.FolderFactory;
 using phase02.Factory.SearchFactory;
 using phase02.Initialize;
 using phase02.InvertedIndex;
+using phase02.QueryManager.WordFinder;
 using phase02.QueryModel;
 using phase02.SearchManager;
+using phase02.SearchManager.ResultList;
 
 namespace phase02;
 
@@ -22,8 +24,7 @@ public class Program
             var folderPath = Console.ReadLine();
             var processor = new SearchInitializer(new DataFolderReaderFactory([new DocumentFolderReader()]),
                 new InvertedIndexController(),
-                new SearchStrategyFactory([new SignedSearchStrategy()]),
-                new SignedSearchStrategy(),
+                new SearchStrategyFactory([new SignedSearchController(new NegativeWordFinder(), new PositiveWordFinder(), new UnsignedWordFinder(), new IntersectResultListMaker(), new UnionResultListMaker(), new SignedSearchStrategy())]),
                 new DocumentTextEditor());
             processor.Build(DataType.Document, folderPath, SearchStrategyType.SignedSearch
             );

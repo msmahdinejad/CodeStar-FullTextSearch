@@ -12,19 +12,19 @@ public class SearchInitializer(
     IDataFolderReaderFactory inputDataFolderReaderFactory,
     IInvertedIndex invertedIndex,
     ISearchStrategyFactory inputSearchStrategyFactory,
-    ISearchStrategy searchController,
     ITextEditor textEditor)
     : ISearchInitializer
 {
+    private ISearchController _searchController;
     public void Build(DataType className, string folderPath, SearchStrategyType searchType)
     {
         
         var dataList = inputDataFolderReaderFactory.MakeDataFolderReader(className).ReadDataListFromFolder(folderPath, textEditor);
         invertedIndex.AddDataListToMap(dataList);
-        searchController = inputSearchStrategyFactory.MakeSearchController(searchType);
+        _searchController = inputSearchStrategyFactory.MakeSearchController(searchType);
     }
     public HashSet<ISearchable> Search(IQuery query)
     {
-        return searchController.SearchWithQuery(query, invertedIndex);
+        return _searchController.SearchWithQuery(query, invertedIndex);
     }
 }

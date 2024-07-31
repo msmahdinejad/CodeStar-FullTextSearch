@@ -4,7 +4,7 @@ using phase02.QueryModel;
 
 namespace phase02.SearchManager;
 
-public interface ISearchStrategy
+public interface ISearchController
 {
     SearchStrategyType SearchStrategyName { get; }
     HashSet<ISearchable> SearchWithQuery(IQuery inputQuery, IInvertedIndex myInvertedIndex);

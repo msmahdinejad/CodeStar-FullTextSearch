@@ -1,81 +1,38 @@
-using phase02.Document;
-using phase02.InvertedIndex;
-using phase02.QueryManager;
-using phase02.QueryModel;
-using phase02.SearchManager.ResultList;
+﻿using phase02.Document;
 
 namespace phase02.SearchManager;
 
-public class SignedSearchStrategy : ISearchStrategy
+public class SignedSearchStrategy : ISignedSearchStrategy
 {
-    private HashSet<ISearchable> _unSignedResult;
-    private HashSet<ISearchable> _positiveResult;
-    private HashSet<ISearchable> _negativeResult;
-    private HashSet<ISearchable> _finalResult;
-    public SearchStrategyType SearchStrategyName => SearchStrategyType.SignedSearch;
-    
-
-    public SignedSearchStrategy()
+    public HashSet<ISearchable> GetResult(HashSet<ISearchable> unSignedResult, HashSet<ISearchable> positiveResult, HashSet<ISearchable> negativeResult, HashSet<ISearchable> allResults)
     {
-        _unSignedResult = new HashSet<ISearchable>();
-        _positiveResult = new HashSet<ISearchable>();
-        _negativeResult = new HashSet<ISearchable>();
-        _finalResult = new HashSet<ISearchable>();
-    }
-
-    public string GetSearchStrategyName()
-    {
-        return SearchStrategyName.ToString();
-    }
-
-    private void HaveUnsignedStrategy(SignedQueryBuilder queryBuilder)
-    {
-        _unSignedResult.ExceptWith(_negativeResult);
-        if (queryBuilder.PositiveWords.Count != 0)
+        HashSet<ISearchable>? finalResult;
+        
+        if (unSignedResult.Count > 0)
         {
-            _unSignedResult.IntersectWith(_positiveResult);
+            unSignedResult.ExceptWith(negativeResult);
+            if (positiveResult.Count != 0)
+            {
+                unSignedResult.IntersectWith(positiveResult);
+            }
+
+            finalResult = new HashSet<ISearchable>(unSignedResult);
+            return finalResult;
+        }
+        else if (positiveResult.Count > 0)
+        {
+            positiveResult.ExceptWith(negativeResult);
+            finalResult = new HashSet<ISearchable>(positiveResult);
+            return finalResult;
+        }
+        else if (negativeResult.Count > 0)
+        {
+            finalResult = new HashSet<ISearchable>(allResults);
+            finalResult.ExceptWith(negativeResult);
+            return finalResult;
         }
 
-        _finalResult = _unSignedResult;
-    }
-
-    private void HavePositiveStrategy()
-    {
-        _positiveResult.ExceptWith(_negativeResult);
-        _finalResult = _positiveResult;
-    }
-
-    private void HaveNegativeStrategy(IInvertedIndex myInvertedIndex)
-    {
-        _finalResult = new HashSet<ISearchable>(myInvertedIndex.GetAllValue());
-        _finalResult.ExceptWith(_negativeResult);
-    }
-
-    private void Strategy(SignedQueryBuilder queryBuilder, IInvertedIndex myInvertedIndex)
-    {
-        _unSignedResult = IntersectResultListMaker.Instance.MakeResultList(queryBuilder.UnSignedWords, myInvertedIndex);
-        _positiveResult = UnionResultListMaker.Instance.MakeResultList(queryBuilder.PositiveWords, myInvertedIndex);
-        _negativeResult = UnionResultListMaker.Instance.MakeResultList(queryBuilder.NegativeWords, myInvertedIndex);
-        if (_unSignedResult.Count > 0)
-        {
-            HaveUnsignedStrategy(queryBuilder);
-        }
-        else if (_positiveResult.Count > 0)
-        {
-            HavePositiveStrategy();
-        }
-        else if (_negativeResult.Count > 0)
-        {
-            HaveNegativeStrategy(myInvertedIndex);
-        }
-    }
-    
-
-    public HashSet<ISearchable> SearchWithQuery(IQuery inputQuery, IInvertedIndex myInvertedIndex)
-    {
-        SignedQueryBuilder queryBuilder = new SignedQueryBuilder();
-        queryBuilder.Build(inputQuery);
-        Strategy(queryBuilder, myInvertedIndex);
-        return _finalResult;
+        finalResult = new HashSet<ISearchable>();
+        return finalResult;
     }
 }

@@ -66,8 +66,6 @@ public class IntersectResultListMakerTests
         };
 
         var invertedIndexMock = new Mock<IInvertedIndex>();
-        invertedIndexMock.Setup(x => x.GetValue(It.IsAny<string>()))
-            .Returns<string>(input => dataMap[input]);
 
         //Act
         var result = _sut.MakeResultList(dataMap.Keys.ToHashSet(), invertedIndexMock.Object);
