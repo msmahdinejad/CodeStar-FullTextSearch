@@ -26,4 +26,8 @@
       <ProjectReference Include="..\Project\FullTextSearch.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="InvertedIndex\" />
+    </ItemGroup>
+
 </Project>

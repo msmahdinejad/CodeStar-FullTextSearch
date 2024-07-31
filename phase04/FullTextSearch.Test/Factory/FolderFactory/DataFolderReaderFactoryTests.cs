@@ -31,7 +31,7 @@ public class DataFolderReaderFactoryTests
     public void MakeDataFolderReader_ShouldReturnsInvalidClassNameException_WhenClassNameIsNotOk()
     {
         //Arrange
-        var className = DataType.Image;
+        var className = DataType.WrongType;
 
         //Act
         var action = () => _sut.MakeDataFolderReader(className);

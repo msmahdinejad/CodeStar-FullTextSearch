@@ -2,5 +2,5 @@
 
 public enum DataType
 {
-    Document,Image
+    Document,WrongType
 }

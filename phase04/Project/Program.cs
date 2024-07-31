@@ -16,15 +16,13 @@ public class Program
 
     public static void Main()
     {
-        var test = new DataFolderReaderFactory([new DocumentFolderReader()]);
-        var a = test.MakeDataFolderReader(DataType.Image);
-        
+
         try
         {
             var folderPath = Console.ReadLine();
             var processor = new SearchInitializer(new DataFolderReaderFactory([new DocumentFolderReader()]),
                 new InvertedIndexController(),
-                new SearchStrategyFactory([new SignedSearchStrategy()], new SignedSearchStrategy()),
+                new SearchStrategyFactory([new SignedSearchStrategy()]),
                 new SignedSearchStrategy(),
                 new DocumentTextEditor());
             processor.Build(DataType.Document, folderPath, SearchStrategyType.SignedSearch
