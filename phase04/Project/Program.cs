@@ -5,7 +5,6 @@ using phase02.Factory.SearchFactory;
 using phase02.Initialize;
 using phase02.InvertedIndex;
 using phase02.QueryModel;
-using phase02.resources;
 using phase02.SearchManager;
 
 namespace phase02;

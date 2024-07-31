@@ -5,7 +5,7 @@ using phase02.Document.Formater;
 using phase02.Exceptions;
 using phase02.Utility.Abstractions;
 
-namespace TestProject.Document;
+namespace FullTextSearch.Test.Document;
 
 public class DocumentFolderReaderTests
 {

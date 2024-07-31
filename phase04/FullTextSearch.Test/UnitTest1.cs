@@ -1,4 +1,4 @@
-namespace TestProject;
+namespace FullTextSearch.Test;
 
 public class UnitTest1
 {

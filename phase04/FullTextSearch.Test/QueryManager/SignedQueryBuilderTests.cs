@@ -1,9 +1,8 @@
 ﻿using Moq;
 using phase02.QueryManager;
-using phase02.QueryManager.WordFinder;
 using phase02.QueryModel;
 
-namespace TestProject.QueryManager;
+namespace FullTextSearch.Test.QueryManager;
 
 using Xunit;
 using System.Collections.Generic;

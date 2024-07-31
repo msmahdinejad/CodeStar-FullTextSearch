@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Project\phase02.csproj" />
+      <ProjectReference Include="..\Project\FullTextSearch.csproj" />
     </ItemGroup>
 
 </Project>

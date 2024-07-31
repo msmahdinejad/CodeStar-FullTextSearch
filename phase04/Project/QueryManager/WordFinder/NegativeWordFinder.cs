@@ -1,6 +1,4 @@
-﻿using phase02.QueryModel;
-
-namespace phase02.QueryManager.WordFinder;
+﻿namespace phase02.QueryManager.WordFinder;
 
 public class NegativeWordFinder : IWordFinder
 {

@@ -1,6 +1,6 @@
 ﻿using phase02.Document.Formater;
 
-namespace TestProject.Document.Formater;
+namespace FullTextSearch.Test.Document.Formater;
 
 public class DocumentTextEditorTests
 {

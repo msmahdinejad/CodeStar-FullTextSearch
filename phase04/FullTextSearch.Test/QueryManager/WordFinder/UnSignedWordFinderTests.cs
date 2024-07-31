@@ -1,7 +1,6 @@
 ﻿using phase02.QueryManager.WordFinder;
-using phase02.QueryModel;
 
-namespace TestProject.QueryManager.WordFinder;
+namespace FullTextSearch.Test.QueryManager.WordFinder;
 
 public class UnSignedWordFinderTests
 {

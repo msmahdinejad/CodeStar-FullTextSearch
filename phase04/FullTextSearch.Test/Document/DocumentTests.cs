@@ -1,7 +1,7 @@
 ﻿using NSubstitute;
 using phase02.Document.Formater;
 
-namespace TestProject.Document;
+namespace FullTextSearch.Test.Document;
 
 public class DocumentTests
 {

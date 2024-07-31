@@ -1,5 +1,6 @@
-namespace TestProject.QueryModel;
 using phase02.QueryModel;
+
+namespace FullTextSearch.Test.QueryModel;
 
 public class QueryTests
 {
