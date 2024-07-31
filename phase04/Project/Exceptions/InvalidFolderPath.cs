@@ -8,7 +8,7 @@ public class InvalidFolderPath : Exception
     {
     }
 
-    public InvalidFolderPath() : base(Resource1.InvalidFolderPathMessage,  new FileNotFoundException())
+    public InvalidFolderPath() : base(Resources.InvalidFolderPathMessage,  new FileNotFoundException())
     {
     }
 }

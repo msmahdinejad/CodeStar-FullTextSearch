@@ -8,7 +8,7 @@ public class InvalidSearchStrategy : Exception
     {
     }
 
-    public InvalidSearchStrategy() : base(Resource1.InvalidSearchStrategyMessage)
+    public InvalidSearchStrategy() : base(Resources.InvalidSearchStrategyMessage)
     {
     }
 }

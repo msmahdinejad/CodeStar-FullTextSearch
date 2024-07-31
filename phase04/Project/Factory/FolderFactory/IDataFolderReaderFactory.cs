@@ -4,5 +4,5 @@ namespace phase02.Factory.FolderFactory;
 
 public interface IDataFolderReaderFactory
 {
-    IDataFolderReader ReadDataListFromFolder(DataType className);
+    IDataFolderReader MakeDataFolderReader(DataType className);
 }

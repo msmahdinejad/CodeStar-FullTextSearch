@@ -10,7 +10,7 @@ public class DataFolderReaderFactory : IDataFolderReaderFactory
     public DataFolderReaderFactory(List<IDataFolderReader> folderReaderList) =>
         _folderReaderList = folderReaderList;
 
-    public IDataFolderReader ReadDataListFromFolder(DataType className)
+    public IDataFolderReader MakeDataFolderReader(DataType className)
     {
         var folderReader = _folderReaderList.SingleOrDefault(x => x.DataType == className);
         return folderReader ?? throw new InvalidClassName();

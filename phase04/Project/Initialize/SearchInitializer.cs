@@ -19,7 +19,7 @@ public class SearchInitializer(
     public void Build(DataType className, string folderPath, SearchStrategyType searchType)
     {
         
-        var dataList = inputDataFolderReaderFactory.ReadDataListFromFolder(className).ReadDataListFromFolder(folderPath, textEditor);
+        var dataList = inputDataFolderReaderFactory.MakeDataFolderReader(className).ReadDataListFromFolder(folderPath, textEditor);
         invertedIndex.AddDataListToMap(dataList);
         searchController = inputSearchStrategyFactory.MakeSearchController(searchType);
     }

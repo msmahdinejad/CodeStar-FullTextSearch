@@ -16,6 +16,9 @@ public class Program
 
     public static void Main()
     {
+        var test = new DataFolderReaderFactory([new DocumentFolderReader()]);
+        var a = test.MakeDataFolderReader(DataType.Image);
+        
         try
         {
             var folderPath = Console.ReadLine();
