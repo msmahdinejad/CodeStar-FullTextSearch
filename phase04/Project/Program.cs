@@ -8,6 +8,7 @@ using phase02.QueryManager.WordFinder;
 using phase02.QueryModel;
 using phase02.SearchManager;
 using phase02.SearchManager.ResultList;
+using phase02.SearchManager.SignedSearchManager;
 
 namespace phase02;
 

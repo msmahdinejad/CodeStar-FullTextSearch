@@ -1,6 +1,6 @@
 ﻿using phase02.Document;
 
-namespace phase02.SearchManager;
+namespace phase02.SearchManager.SignedSearchManager;
 
 public class SignedSearchStrategy : ISignedSearchStrategy
 {

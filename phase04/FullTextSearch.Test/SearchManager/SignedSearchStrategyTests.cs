@@ -2,6 +2,7 @@
 using phase02.Document;
 using phase02.Document.Formater;
 using phase02.SearchManager;
+using phase02.SearchManager.SignedSearchManager;
 
 namespace FullTextSearch.Test.SearchManager;
 

@@ -1,11 +1,10 @@
 using phase02.Document;
 using phase02.InvertedIndex;
-using phase02.QueryManager;
 using phase02.QueryManager.WordFinder;
 using phase02.QueryModel;
 using phase02.SearchManager.ResultList;
 
-namespace phase02.SearchManager;
+namespace phase02.SearchManager.SignedSearchManager;
 
 public class SignedSearchController : ISearchController
 {

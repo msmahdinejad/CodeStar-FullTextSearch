@@ -15,16 +15,18 @@ public class SearchInitializer(
     ITextEditor textEditor)
     : ISearchInitializer
 {
-    private ISearchController _searchController;
+    public ISearchController SearchController { get; set; }
+    public IDataFolderReader DataFolderReader { get; set; }
     public void Build(DataType className, string folderPath, SearchStrategyType searchType)
     {
-        
-        var dataList = inputDataFolderReaderFactory.MakeDataFolderReader(className).ReadDataListFromFolder(folderPath, textEditor);
+
+        DataFolderReader = inputDataFolderReaderFactory.MakeDataFolderReader(className);
+        var dataList = DataFolderReader.ReadDataListFromFolder(folderPath, textEditor);
         invertedIndex.AddDataListToMap(dataList);
-        _searchController = inputSearchStrategyFactory.MakeSearchController(searchType);
+        SearchController = inputSearchStrategyFactory.MakeSearchController(searchType);
     }
     public HashSet<ISearchable> Search(IQuery query)
     {
-        return _searchController.SearchWithQuery(query, invertedIndex);
+        return SearchController.SearchWithQuery(query, invertedIndex);
     }
 }

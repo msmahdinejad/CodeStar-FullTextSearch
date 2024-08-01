@@ -5,9 +5,6 @@ namespace phase02.SearchManager.ResultList;
 
 public class IntersectResultListMaker : IResultListMaker
 {
-    private static IntersectResultListMaker _intersectResultListMaker;
-    public static IntersectResultListMaker Instance => _intersectResultListMaker ??= new IntersectResultListMaker();
-
     public HashSet<ISearchable> MakeResultList(HashSet<string> keyList, IInvertedIndex myInvertedIndex)
     {
         HashSet<ISearchable> resultList = new HashSet<ISearchable>();
