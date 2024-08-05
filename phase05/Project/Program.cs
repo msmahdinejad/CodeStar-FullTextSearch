@@ -1,4 +1,5 @@
 ﻿using phase02.Document;
+using phase02.Document.Extractor;
 using phase02.Document.Formater;
 using phase02.Factory.FolderFactory;
 using phase02.Factory.SearchFactory;

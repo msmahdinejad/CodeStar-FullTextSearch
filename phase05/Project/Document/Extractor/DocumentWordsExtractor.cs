@@ -1,6 +1,4 @@
-﻿using phase02.Document.Formater;
-
-namespace phase02.Document;
+﻿namespace phase02.Document.Extractor;
 
 public class DocumentWordsExtractor : IExtractor
 {
