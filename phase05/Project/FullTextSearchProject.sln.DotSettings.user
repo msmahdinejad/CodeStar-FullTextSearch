@@ -18,6 +18,8 @@
     &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.QueryModel.AdvancedQueryTests.SplittedText_InputText_ReturnsSplittedArray&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.QueryModel.AdvancedQueryTests.SplittedText_EmptyText_ReturnsEmptyArray&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.QueryModel.AdvancedQueryTests.SplittedText_InputText_ReturnsUpperTextArray&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.Document.Extractor.DocumentWordsExtractorTests.ReadDataListFromFolder_ShouldReturnCorrectDataType_Whenenver&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.Document.Extractor.AdvancedDocumentWordsExtractorTests.GetKey_ShouldReturnCorrectList_Whenenver&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=FullTextSearch_002Fresources_002FResource1/@EntryIndexedValue">False</s:Boolean>
