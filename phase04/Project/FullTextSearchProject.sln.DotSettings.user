@@ -1,0 +1,23 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\kimia\AppData\Local\JetBrains\Rider2024.1\resharper-host\temp\Rider\vAny\CoverageData\_FullTextSearchProject.1410067205\Snapshot\snapshot.utdcvr</s:String>
+	
+	
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=929888f0_002D4670_002D4af3_002Da4b5_002D32f39ff65038/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SplittedText_NullText_ReturnsNullArray" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bd29fbdb_002D5998_002D4ca8_002Daab6_002Dafe53b6d127c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SearchWithQuery_ShouldCallCorrectMethods_Whenever" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.SearchManager.SignedSearchControllerTests.SearchWithQuery_ShouldCallCorrectMethods_Whenever&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.InvertedIndex.InvertedIndexControllerTests.AddDataListToMap_ShouldAddCorrectly_WhenDataListIsOk&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.Factory.SearchFactory.SearchStrategyFactoryTests.MakeSearchController_ShouldReturnsInvalidSearchStrategyException_WhenSearchStrategyTypeIsNotOk&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.Document.DocumentTests.GetValue_ShouldReturnDocumentName_Whenever&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.Document.DocumentTests.GetKey_ShouldCallTextSplitter_Whenever&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.Document.DocumentTests.GetKey_ShouldReturnExpectedKeys_WhenCallTextSplitter&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A94790C6-4ACC-46F3-A0D9-D121524FF413::net8.0::FullTextSearch.Test.Document.DocumentTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=FullTextSearch_002Fresources_002FResource1/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=FullTextSearch_002Fresources_002FResource1/@EntryIndexRemoved">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=FullTextSearch_002Fresources_002FResources/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean></wpf:ResourceDictionary>
