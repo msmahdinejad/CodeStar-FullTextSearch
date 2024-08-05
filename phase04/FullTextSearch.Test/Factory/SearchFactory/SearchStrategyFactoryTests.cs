@@ -34,7 +34,7 @@ public class SearchStrategyFactoryTests
     public void MakeSearchController_ShouldReturnsInvalidSearchStrategyException_WhenSearchStrategyTypeIsNotOk()
     {
         //Arrange
-        var searchStrategy = SearchStrategyType.WrongType;
+        var searchStrategy = (SearchStrategyType)(-2);
 
         //Act
         var action = () => _sut.MakeSearchController(searchStrategy);

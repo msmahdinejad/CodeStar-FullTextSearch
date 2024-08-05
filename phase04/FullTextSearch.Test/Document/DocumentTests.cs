@@ -20,8 +20,9 @@ public class DocumentTests
     public void GetKey_ShouldReturnExpectedKeys_WhenCallTextSplitter()
     {
         // Arrange
+        var text = "testDocText";
         var expectedKeys = new[] { "test" };
-        _textEditor.TextSplitter(_text).Returns(expectedKeys);
+        _textEditor.TextSplitter(text).Returns(expectedKeys);
         
         // Act
         var result = _sut.GetKey();
@@ -34,23 +35,25 @@ public class DocumentTests
     public void GetKey_ShouldCallTextSplitter_Whenever()
     {
         // Arrange
-        
+        var text = "testDocText";
+
         // Act
        _sut.GetKey();
 
         // Assert
-        _textEditor.Received(1).TextSplitter(_text);
+        _textEditor.Received(1).TextSplitter(text);
     }
     
     [Fact]
     public void GetValue_ShouldReturnDocumentName_Whenever()
     {
         // Arrange
-        
+        var name = "testDocName";
+
         // Act
         var result = _sut.GetValue();
 
         // Assert
-        Assert.Equal(result, _name);
+        Assert.Equal(result, name);
     }
 }

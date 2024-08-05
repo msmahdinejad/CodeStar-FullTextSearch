@@ -46,7 +46,7 @@ public class DocumentFolderReaderTests
         // Assert
         for (int i = 0; i < 2; i++)
         {
-            Assert.Equal(result[0], expectedResult[0]);
+            Assert.Equal(result[i], expectedResult[i]);
         }
     }
     
@@ -80,7 +80,7 @@ public class DocumentFolderReaderTests
         // Assert
         for (int i = 0; i < 2; i++)
         {
-            Assert.NotEqual(result[0], expectedResult[0]);
+            Assert.NotEqual(result[i], expectedResult[i]);
         }
     }
     
@@ -105,12 +105,12 @@ public class DocumentFolderReaderTests
     public void ReadDataListFromFolder_ShouldReturnCorrectDataType_Whenenver()
     {
         // Arrange
-        
+        var expected = DataType.Document;
         
         // Act
         var result = _sut.DataType;
         
         // Assert
-        Assert.Equal(DataType.Document, result);
+        Assert.Equal(expected, result);
     }
 }

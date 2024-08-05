@@ -116,7 +116,6 @@ public class InvertedIndexControllerTests
         var result = _sut.GetAllValue();
 
         //Assert
-        Assert.Equal(3, result.Count);
         Assert.Equal(result,expectedResult);
     }
     

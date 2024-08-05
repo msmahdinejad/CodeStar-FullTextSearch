@@ -2,5 +2,5 @@
 
 public enum SearchStrategyType
 {
-    SignedSearch,WrongType
+    SignedSearch
 }
