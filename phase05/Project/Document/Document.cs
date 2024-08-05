@@ -6,13 +6,13 @@ public class Document : ISearchable
 {
     public  string DocName { get; }
     public string Text { get; }
-    public ITextEditor TextEditor1 { get; }
+    public ITextEditor TextEditor { get; }
 
     public Document(string docName, string text, ITextEditor textEditor)
     {
         DocName = docName;
         Text = text;
-        TextEditor1 = textEditor;
+        TextEditor = textEditor;
     }
     
     public override bool Equals(object obj)
@@ -27,9 +27,9 @@ public class Document : ISearchable
         return DocName == other.DocName && Text == other.Text;
     }
     
-    public IEnumerable<string> GetKey()
+    public IEnumerable<string> GetWords()
     {
-        return TextEditor1.TextSplitter(Text);
+        return TextEditor.TextSplitter(Text);
     }
 
     public string GetValue()

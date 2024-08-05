@@ -19,13 +19,13 @@ public class AdvancedQueryTests
     public void SplittedText_InputText_ReturnsUpperTextArray()
     {
         //Arrange
-        var query = new AdvancedQuery("aBc air \"test\"");
+        var query = new AdvancedQuery("aBc air -\"test\"");
         //Act
         var result = query.SplitedText;
         //Assert
         Assert.Contains("ABC", result);
         Assert.Contains("AIR", result);
-        Assert.Contains("\"TEST\"", result);
+        Assert.Contains("-TEST", result);
     }
     
     [Fact]

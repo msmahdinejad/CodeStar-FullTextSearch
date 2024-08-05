@@ -26,7 +26,7 @@ public class Program
             var processor = new SearchInitializer(new DataFolderReaderFactory([new DocumentFolderReader()]),
                 new InvertedIndexController(),
                 new SearchStrategyFactory([new SignedSearchController(new NegativeWordFinder(), new PositiveWordFinder(), new UnsignedWordFinder(), new IntersectResultListMaker(), new UnionResultListMaker(), new SignedSearchStrategy())]),
-                new DocumentTextEditor());
+                new DocumentTextEditor(), new DocumentWordsExtractor());
             processor.Build(DataType.Document, folderPath, SearchStrategyType.SignedSearch
             );
 

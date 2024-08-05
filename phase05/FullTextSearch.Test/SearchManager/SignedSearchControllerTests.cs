@@ -40,6 +40,6 @@ public class SignedSearchControllerTests
         intersectResultListMakerMock.Verify(x => x.MakeResultList(It.IsAny<HashSet<string>>(), invertedIndexMock.Object), Times.Once);
         unionResultListMakerMock.Verify(x => x.MakeResultList(It.IsAny<HashSet<string>>(), invertedIndexMock.Object), Times.Exactly(2));
         signedSearchStrategyMock.Verify(x =>
-            x.GetResult(It.IsAny<HashSet<ISearchable>>(), It.IsAny<HashSet<ISearchable>>(), It.IsAny<HashSet<ISearchable>>(), invertedIndexMock.Object.GetAllValue()), Times.Once);
+            x.GetResult(It.IsAny<HashSet<string>>(),It.IsAny<HashSet<string>>(),It.IsAny<HashSet<string>>(), It.IsAny<HashSet<ISearchable>>(), It.IsAny<HashSet<ISearchable>>(), It.IsAny<HashSet<ISearchable>>(), invertedIndexMock.Object.GetAllValue()), Times.Once);
     }
 }

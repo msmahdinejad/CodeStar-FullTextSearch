@@ -25,7 +25,7 @@ public class DocumentTests
         _textEditor.TextSplitter(text).Returns(expectedKeys);
         
         // Act
-        var result = _sut.GetKey();
+        var result = _sut.GetWords();
 
         // Assert
         Assert.Equal(expectedKeys, result);
@@ -38,7 +38,7 @@ public class DocumentTests
         var text = "testDocText";
 
         // Act
-       _sut.GetKey();
+       _sut.GetWords();
 
         // Assert
         _textEditor.Received(1).TextSplitter(text);

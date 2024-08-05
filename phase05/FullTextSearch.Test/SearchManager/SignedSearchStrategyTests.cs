@@ -18,6 +18,9 @@ public class SignedSearchStrategyTests
     [Theory]
     [MemberData(nameof(GetTestData))]
     public void GetResult_ShouldReturnExpectedResult_Whenever(
+        HashSet<string> unSignedWords,
+        HashSet<string> positiveWords, 
+        HashSet<string> negativeWords,
         HashSet<ISearchable> unsignedResult,
         HashSet<ISearchable> positiveResult,
         HashSet<ISearchable> negativeResult,
@@ -25,7 +28,7 @@ public class SignedSearchStrategyTests
         HashSet<ISearchable> expectedResult)
     {
         // Act
-        var result = _sut.GetResult(unsignedResult, positiveResult, negativeResult, allResults);
+        var result = _sut.GetResult(unSignedWords, positiveWords, negativeWords, unsignedResult, positiveResult, negativeResult, allResults);
 
         // Assert
         Assert.Equal(expectedResult, result);
@@ -39,6 +42,9 @@ public class SignedSearchStrategyTests
         
         yield return new object[]
         {
+            new HashSet<string>() {"1"},
+            new HashSet<string>() {"1"},
+            new HashSet<string>() {},
             new HashSet<ISearchable> { doc1, doc2 },
             new HashSet<ISearchable> { doc2, doc3 },
             new HashSet<ISearchable>(),
@@ -48,6 +54,9 @@ public class SignedSearchStrategyTests
 
         yield return new object[]
         {
+            new HashSet<string>() {},
+            new HashSet<string>() {"1"},
+            new HashSet<string>() {"1"},
             new HashSet<ISearchable>(),
             new HashSet<ISearchable> { doc1, doc2 },
             new HashSet<ISearchable> { doc2 },
@@ -57,15 +66,21 @@ public class SignedSearchStrategyTests
 
         yield return new object[]
         {
+            new HashSet<string>() {},
+            new HashSet<string>() {},
+            new HashSet<string>() {"1"},
             new HashSet<ISearchable>(),
             new HashSet<ISearchable>(),
             new HashSet<ISearchable> { doc1 },
-            new HashSet<ISearchable> { doc1, doc2 },
+            new HashSet<ISearchable> { doc1 },
             new HashSet<ISearchable> { doc2 }
         };
 
         yield return new object[]
         {
+            new HashSet<string>() {},
+            new HashSet<string>() {},
+            new HashSet<string>() {},
             new HashSet<ISearchable>(),
             new HashSet<ISearchable>(),
             new HashSet<ISearchable>(),

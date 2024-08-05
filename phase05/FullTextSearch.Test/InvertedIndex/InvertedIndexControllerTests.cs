@@ -22,11 +22,12 @@ public class InvertedIndexControllerTests
         var keys = new List<string> { "a" };
         var docName = "test";
         var dataMock = new Mock<ISearchable>();
-        dataMock.Setup(x => x.GetKey()).Returns(keys);
+        var extractorMock = new Mock<IExtractor>();
+        extractorMock.Setup(x => x.GetKey(dataMock.Object)).Returns(keys);
         dataMock.Setup(x => x.GetValue()).Returns(docName);
         
         //Act
-        _sut.AddDataToMap(dataMock.Object);
+        _sut.AddDataToMap(dataMock.Object, extractorMock.Object);
         var result = _sut.GetValue("a");
 
         //Assert
@@ -38,26 +39,29 @@ public class InvertedIndexControllerTests
     public void AddDataListToMap_ShouldAddCorrectly_WhenDataListIsOk()
     {
         //Arrange
+        var extractorMock = new Mock<IExtractor>();
+        
+        
         var keys = new List<string> { "a" };
         var docName = "test";
         var dataMock = new Mock<ISearchable>();
-        dataMock.Setup(x => x.GetKey()).Returns(keys);
         dataMock.Setup(x => x.GetValue()).Returns(docName);
+        extractorMock.Setup(x => x.GetKey(dataMock.Object)).Returns(keys);
         
         var keys2 = new List<string> { "b" };
         var docName2 = "test2";
         var dataMock2 = new Mock<ISearchable>();
-        dataMock2.Setup(x => x.GetKey()).Returns(keys2);
         dataMock2.Setup(x => x.GetValue()).Returns(docName2);
+        extractorMock.Setup(x => x.GetKey(dataMock2.Object)).Returns(keys2);
         
         var keys3 = new List<string> { "a" };
         var docName3 = "test3";
         var dataMock3 = new Mock<ISearchable>();
-        dataMock3.Setup(x => x.GetKey()).Returns(keys3);
         dataMock3.Setup(x => x.GetValue()).Returns(docName3);
+        extractorMock.Setup(x => x.GetKey(dataMock3.Object)).Returns(keys3);
 
         //Act
-        _sut.AddDataListToMap(new List<ISearchable>{dataMock.Object,dataMock2.Object,dataMock3.Object});
+        _sut.AddDataListToMap(new List<ISearchable>{dataMock.Object,dataMock2.Object,dataMock3.Object}, extractorMock.Object);
         var result = _sut.GetValue("a");
         var result2 = _sut.GetValue("b");
 
@@ -76,11 +80,13 @@ public class InvertedIndexControllerTests
         var keys = new List<string> { "a" };
         var docName = "test";
         var dataMock = new Mock<ISearchable>();
-        dataMock.Setup(x => x.GetKey()).Returns(keys);
         dataMock.Setup(x => x.GetValue()).Returns(docName);
+        var extractorMock = new Mock<IExtractor>();
+        extractorMock.Setup(x => x.GetKey(dataMock.Object)).Returns(keys);
+        
         
         //Act
-        _sut.AddDataToMap(dataMock.Object);
+        _sut.AddDataToMap(dataMock.Object, extractorMock.Object);
         var result = _sut.GetValue("b");
 
         //Assert
@@ -91,28 +97,31 @@ public class InvertedIndexControllerTests
     public void GetAllValue_ShouldReturnsAllValue_When()
     {
         //Arrange
+        var extractorMock = new Mock<IExtractor>();
+        
+        
         var keys = new List<string> { "a" };
         var docName = "test";
         var dataMock = new Mock<ISearchable>();
-        dataMock.Setup(x => x.GetKey()).Returns(keys);
         dataMock.Setup(x => x.GetValue()).Returns(docName);
+        extractorMock.Setup(x => x.GetKey(dataMock.Object)).Returns(keys);
         
         var keys2 = new List<string> { "b" };
         var docName2 = "test2";
         var dataMock2 = new Mock<ISearchable>();
-        dataMock2.Setup(x => x.GetKey()).Returns(keys2);
         dataMock2.Setup(x => x.GetValue()).Returns(docName2);
+        extractorMock.Setup(x => x.GetKey(dataMock2.Object)).Returns(keys);
         
         var keys3 = new List<string> { "a" };
         var docName3 = "test3";
         var dataMock3 = new Mock<ISearchable>();
-        dataMock3.Setup(x => x.GetKey()).Returns(keys3);
         dataMock3.Setup(x => x.GetValue()).Returns(docName3);
+        extractorMock.Setup(x => x.GetKey(dataMock3.Object)).Returns(keys);
 
         var expectedResult = new HashSet<ISearchable> { dataMock.Object, dataMock2.Object, dataMock3.Object };
         
         //Act
-        _sut.AddDataListToMap(new List<ISearchable>{dataMock.Object,dataMock2.Object,dataMock3.Object});
+        _sut.AddDataListToMap(new List<ISearchable>{dataMock.Object,dataMock2.Object,dataMock3.Object}, extractorMock.Object);
         var result = _sut.GetAllValue();
 
         //Assert

@@ -5,14 +5,14 @@ namespace phase02.QueryModel;
 public class AdvancedQuery : IQuery
 {
     public string Text { get; init; }
-    public string[] SplitedText => AdvancedSplitter(Text);
+    public string[] SplitedText => AdvancedSplitter(Text.ToUpper());
     public AdvancedQuery(string text) => Text = text;
-    
-    private List<string> ExtractSingleWord(string searchInput) 
+
+    private List<string> ExtractSingleWord(string text)
     {
-        string singleWords = Regex.Replace(searchInput, "([+-| ]\"([^\"]*)\")", "");
+        var singleWords = Regex.Replace(text, "([+-| ]\"([^\"]*)\")", "");
         var splitInput = singleWords.Split(" ").ToList();
-        List<string> result = new List<string>();
+        var result = new List<string>();
         foreach (var word in splitInput)
         {
             if (word != "")
@@ -24,19 +24,19 @@ public class AdvancedQuery : IQuery
         return result;
     }
 
-    private List<string> ExtractPhrase(string searchInput)
-    { 
-        Regex sign = new Regex(@"([+-]?)\s*""([^""]*)""");
-        Regex phease = new Regex(@"[-+ ]""([^""]*)""");
-        List<string> phrases = phease.Matches(searchInput)
+    private List<string> ExtractPhrase(string text)
+    {
+        var sign = new Regex(@"([+-]?)\s*""([^""]*)""");
+        var phease = new Regex(@"[-+ ]""([^""]*)""");
+        var phrases = phease.Matches(text)
             .Cast<Match>()
             .Select(match => match.Groups[1].Value)
             .ToList();
-        List<string> signs = sign.Matches(searchInput)
+        var signs = sign.Matches(text)
             .Cast<Match>()
             .Select(match => match.Groups[1].Value)
             .ToList();
-        List<string> result = signs.Zip(phrases, (sign, phrase) => sign + phrase).ToList();
+        var result = signs.Zip(phrases, (sign, phrase) => sign + phrase).ToList();
         return result;
     }
 

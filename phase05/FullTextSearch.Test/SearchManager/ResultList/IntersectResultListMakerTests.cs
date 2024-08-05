@@ -18,23 +18,26 @@ public class IntersectResultListMakerTests
     public void MakeResultList_ShouldReturnsIntersectResultList_WhenInputDataIsOk()
     {
         //Arrange
+        var extractorMock = new Mock<IExtractor>();
+        
+        
         var keys = new List<string> { "a" };
         var docName = "test";
         var dataMock = new Mock<ISearchable>();
-        dataMock.Setup(x => x.GetKey()).Returns(keys);
         dataMock.Setup(x => x.GetValue()).Returns(docName);
-
+        extractorMock.Setup(x => x.GetKey(dataMock.Object)).Returns(keys);
+        
         var keys2 = new List<string> { "b" };
         var docName2 = "test2";
         var dataMock2 = new Mock<ISearchable>();
-        dataMock2.Setup(x => x.GetKey()).Returns(keys2);
         dataMock2.Setup(x => x.GetValue()).Returns(docName2);
-
+        extractorMock.Setup(x => x.GetKey(dataMock2.Object)).Returns(keys);
+        
         var keys3 = new List<string> { "a" };
         var docName3 = "test3";
         var dataMock3 = new Mock<ISearchable>();
-        dataMock3.Setup(x => x.GetKey()).Returns(keys3);
         dataMock3.Setup(x => x.GetValue()).Returns(docName3);
+        extractorMock.Setup(x => x.GetKey(dataMock3.Object)).Returns(keys);
 
         var dataMap = new Dictionary<string, HashSet<ISearchable>>
         {

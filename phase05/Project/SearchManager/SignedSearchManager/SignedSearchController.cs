@@ -40,7 +40,7 @@ public class SignedSearchController : ISearchController
         var unSignedResult = _intersectResultListMaker.MakeResultList(unSignedWords, myInvertedIndex);
         var positiveResult = _unionResultListMaker.MakeResultList(positiveWords, myInvertedIndex);
         var negativeResult = _unionResultListMaker.MakeResultList(negativeWords, myInvertedIndex);
-        var finalResult = _signedSearchStrategy.GetResult(unSignedResult, positiveResult, negativeResult, myInvertedIndex.GetAllValue());
+        var finalResult = _signedSearchStrategy.GetResult(unSignedWords, positiveWords, negativeWords, unSignedResult, positiveResult, negativeResult, myInvertedIndex.GetAllValue());
         return finalResult;
     }
 }

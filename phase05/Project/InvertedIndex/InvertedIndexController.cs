@@ -11,9 +11,9 @@ public class InvertedIndexController : IInvertedIndex
         _map = new Dictionary<string, HashSet<ISearchable>>();
     }
 
-    public void AddDataToMap(ISearchable myData)
+    public void AddDataToMap(ISearchable myData, IExtractor myExtractor)
     {
-        foreach (var key in myData.GetKey())
+        foreach (var key in myExtractor.GetKey(myData))
         {
             if (!_map.ContainsKey(key))
             {
@@ -26,11 +26,11 @@ public class InvertedIndexController : IInvertedIndex
         }
     }
 
-    public void AddDataListToMap(IEnumerable<ISearchable> dataList)
+    public void AddDataListToMap(IEnumerable<ISearchable> dataList, IExtractor myExtractor)
     {
         foreach (var data in dataList)
         {
-            AddDataToMap(data);
+            AddDataToMap(data, myExtractor);
         }
     }
 
