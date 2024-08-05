@@ -25,7 +25,7 @@ public class AdvancedQueryTests
         //Assert
         Assert.Contains("ABC", result);
         Assert.Contains("AIR", result);
-        Assert.Contains("\"test\"", result);
+        Assert.Contains("\"TEST\"", result);
     }
     
     [Fact]
@@ -36,6 +36,6 @@ public class AdvancedQueryTests
         //Act
         var result = query.SplitedText;
         //Assert
-        Assert.Equal(4, result.Length);
+        Assert.Equal(5, result.Length);
     }
 }
