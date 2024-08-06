@@ -27,4 +27,7 @@
     <data name="InvalidSearchStrategyMessage" xml:space="preserve">
         <value>Search Strategy Not Found!</value>
     </data>
+    <data name="FolderPath" xml:space="preserve">
+        <value>C:\Users\SALEH\Desktop\CodeStar\Summer1403-SE-Team02\phase06\FullTextsearch\FullTextsearch\resources\EnglishData</value>
+    </data>
 </root>

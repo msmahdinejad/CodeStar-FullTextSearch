@@ -8,6 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace FullTextsearch.resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -35,7 +38,7 @@ namespace FullTextsearch.resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("phase02.resources.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FullTextsearch.resources.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -53,6 +56,15 @@ namespace FullTextsearch.resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C:\Users\SALEH\Desktop\CodeStar\Summer1403-SE-Team02\phase06\FullTextsearch\FullTextsearch\resources\EnglishData.
+        /// </summary>
+        internal static string FolderPath {
+            get {
+                return ResourceManager.GetString("FolderPath", resourceCulture);
             }
         }
         
