@@ -27,14 +27,14 @@ public class Program
             var processor = new SearchInitializer(new DataFolderReaderFactory([new DocumentFolderReader()]),
                 new InvertedIndexController(),
                 new SearchStrategyFactory([new SignedSearchController(new NegativeWordFinder(), new PositiveWordFinder(), new UnsignedWordFinder(), new IntersectResultListMaker(), new UnionResultListMaker(), new SignedSearchStrategy())]),
-                new DocumentTextEditor(), new DocumentWordsExtractor());
+                new DocumentTextEditor(), new AdvancedDocumentWordsExtractor());
             processor.Build(DataType.Document, folderPath, SearchStrategyType.SignedSearch
             );
 
             var queryText = Console.ReadLine();
             while (queryText != EndQuery)
             {
-                var query = new Query(queryText);
+                var query = new AdvancedQuery(queryText);
                 var result = processor.Search(query);
                 if (result.Count == 0)
                 {
