@@ -5,7 +5,7 @@ namespace phase02.QueryModel;
 public class AdvancedQuery : IQuery
 {
     public string Text { get; init; }
-    public string[] SplitedText => AdvancedSplitter(Text.ToUpper());
+    public string[] SplitedText => AdvancedSplitter(Text);
     public AdvancedQuery(string text) => Text = text;
 
     private string[] AdvancedSplitter(string text)
