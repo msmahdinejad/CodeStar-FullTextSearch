@@ -8,40 +8,37 @@ public class AdvancedQuery : IQuery
     public string[] SplitedText => AdvancedSplitter(Text.ToUpper());
     public AdvancedQuery(string text) => Text = text;
 
-    private List<string> ExtractSingleWord(string text)
+    private string[] AdvancedSplitter(string text)
     {
-        var singleWords = Regex.Replace(text, "([+-| ]\"([^\"]*)\")", "");
-        var splitInput = singleWords.Split(" ").ToList();
+        var words = text.ToUpper().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        var sentenceReader = false;
+        var sentence = "";
         var result = new List<string>();
-        foreach (var word in splitInput)
+        foreach (var word in words)
         {
-            if (word != "")
+            if (word.StartsWith('"') || word[1] == '"')
             {
-                result.Add(word.ToString());
+                sentenceReader = true;
+                sentence = word;
             }
+            else if (sentenceReader)
+            {
+                sentence = sentence + " " + word;
+            }
+            else
+            {
+                result.Add(word);
+            }
+            
+            if (word.EndsWith('"'))
+            {
+                sentenceReader = false;
+                result.Add(sentence.Replace("\"", ""));
+                sentence = "";
+            }
+            
         }
 
-        return result;
-    }
-
-    private List<string> ExtractPhrase(string text)
-    {
-        var sign = new Regex(@"([+-]?)\s*""([^""]*)""");
-        var phease = new Regex(@"[-+ ]""([^""]*)""");
-        var phrases = phease.Matches(text)
-            .Cast<Match>()
-            .Select(match => match.Groups[1].Value)
-            .ToList();
-        var signs = sign.Matches(text)
-            .Cast<Match>()
-            .Select(match => match.Groups[1].Value)
-            .ToList();
-        var result = signs.Zip(phrases, (sign, phrase) => sign + phrase).ToList();
-        return result;
-    }
-
-    private string[] AdvancedSplitter(string inputSearch)
-    {
-        return ExtractSingleWord(inputSearch).Concat(ExtractPhrase(inputSearch)).ToArray();
+        return result.ToArray();
     }
 }
