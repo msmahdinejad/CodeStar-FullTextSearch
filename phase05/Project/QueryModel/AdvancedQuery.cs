@@ -28,15 +28,14 @@ public class AdvancedQuery : IQuery
             else
             {
                 result.Add(word);
+                continue;
             }
-            
-            if (word.EndsWith('"'))
-            {
-                sentenceReader = false;
-                result.Add(sentence.Replace("\"", ""));
-                sentence = "";
-            }
-            
+
+            if (!word.EndsWith('"')) continue;
+            sentenceReader = false;
+            result.Add(sentence.Replace("\"", ""));
+            sentence = "";
+
         }
 
         return result.ToArray();
