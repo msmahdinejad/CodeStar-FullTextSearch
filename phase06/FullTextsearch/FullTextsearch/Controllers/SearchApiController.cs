@@ -1,4 +1,5 @@
-﻿using FullTextsearch.Document;
+﻿using FullTextsearch.Context;
+using FullTextsearch.Document;
 using FullTextsearch.Document.Extractor;
 using FullTextsearch.Document.Formater;
 using FullTextsearch.Factory.FolderFactory;
@@ -19,23 +20,22 @@ namespace FullTextsearch.Controllers;
 [ApiController]
 public class SearchApiController : ControllerBase
 {
-    private SearchInitializer _processor;
+    private readonly ApplicationDbContext _context;
+    private readonly ISearchInitializer _searchInitializer;
     
-    public SearchApiController()
+    public SearchApiController(ApplicationDbContext context, ISearchInitializer searchInitializer)
     {
-        _processor = new SearchInitializer(new DataFolderReaderFactory([new DocumentFolderReader()]),
-            new InvertedIndexDbController(),
-            new SearchStrategyFactory([new SignedSearchController(new NegativeWordFinder(), new PositiveWordFinder(), new UnsignedWordFinder(), new IntersectResultListMaker(), new UnionResultListMaker(), new SignedSearchStrategy())]),
-            new DocumentTextEditor(), new AdvancedDocumentWordsExtractor());
+        _context = context;
+        _searchInitializer = searchInitializer;
         
-        _processor.Build(DataType.Document, resources.Resources.FolderPath, SearchStrategyType.SignedSearch);
+        _searchInitializer.Build(DataType.Document, resources.Resources.FolderPath, SearchStrategyType.SignedSearch);
     }
     
     [HttpGet("{queryText}")]
     public IActionResult SearchWithQuery([FromRoute]string queryText)
     {
         var query = new AdvancedQuery(queryText);
-        var result = _processor.Search(query);
+        var result = _searchInitializer.Search(query);
         if (result.Count == 0)
         {
             return NotFound();

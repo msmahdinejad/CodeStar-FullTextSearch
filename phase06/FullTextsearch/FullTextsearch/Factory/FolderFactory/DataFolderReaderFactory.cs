@@ -5,9 +5,9 @@ namespace FullTextsearch.Factory.FolderFactory;
 
 public class DataFolderReaderFactory : IDataFolderReaderFactory
 {
-    private List<IDataFolderReader> _folderReaderList { get; set; }
+    private IEnumerable<IDataFolderReader> _folderReaderList { get; set; }
 
-    public DataFolderReaderFactory(List<IDataFolderReader> folderReaderList) =>
+    public DataFolderReaderFactory(IEnumerable<IDataFolderReader> folderReaderList) =>
         _folderReaderList = folderReaderList;
 
     public IDataFolderReader MakeDataFolderReader(DataType className)

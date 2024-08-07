@@ -7,11 +7,15 @@ namespace FullTextsearch.InvertedIndex;
 
 public class InvertedIndexDbController : IInvertedIndex
 {
-    private ApplicationDbContext _applicationDbContext = new();
+    private ApplicationDbContext _context;
 
+    public InvertedIndexDbController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
     public void AddDataToMap(ISearchable myData, IExtractor myExtractor)
     {
-        var invertedIndexMap = _applicationDbContext.InvertedIndexMap;
+        var invertedIndexMap = _context.InvertedIndexMap;
         foreach (var key in myExtractor.GetKey(myData))
         {
             var record = invertedIndexMap.FirstOrDefault(x => x.Key == key);
@@ -24,11 +28,11 @@ public class InvertedIndexDbController : IInvertedIndex
             else
             {
                 var newRecord = new InvertedIndexRecord() { Key = key, Values = [myData.GetValue()] };
-                _applicationDbContext.InvertedIndexMap.Add(newRecord);
+                _context.InvertedIndexMap.Add(newRecord);
             }
         }
 
-        _applicationDbContext.SaveChanges();
+        _context.SaveChanges();
     }
 
     public void AddDataListToMap(IEnumerable<ISearchable> dataList, IExtractor myExtractor)
@@ -41,7 +45,7 @@ public class InvertedIndexDbController : IInvertedIndex
 
     public HashSet<ISearchable> GetValue(string word)
     {
-        var invertedIndexMap = _applicationDbContext.InvertedIndexMap.ToList().Select(x => new {key = x.Key, values = x.Values.ToList().Select(x => new DbValue.DbValue(x))});
+        var invertedIndexMap = _context.InvertedIndexMap.ToList().Select(x => new {key = x.Key, values = x.Values.ToList().Select(x => new DbValue.DbValue(x))});
         var record = invertedIndexMap.FirstOrDefault(x => x.key == word);
         if (record != null)
         {
@@ -53,7 +57,7 @@ public class InvertedIndexDbController : IInvertedIndex
 
     public HashSet<ISearchable> GetAllValue()
     {
-        var invertedIndexMap = _applicationDbContext.InvertedIndexMap.ToList();
+        var invertedIndexMap = _context.InvertedIndexMap.ToList();
         var allValue = invertedIndexMap.Select(x => x.Values.ToList().Select(y => new DbValue.DbValue(y)));
         var result = new HashSet<ISearchable>();
         foreach (var dbValues in allValue)

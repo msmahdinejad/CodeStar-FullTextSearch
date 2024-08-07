@@ -5,8 +5,8 @@ namespace FullTextsearch.Factory.SearchFactory;
 
 public class SearchStrategyFactory : ISearchStrategyFactory
 {
-    private List<ISearchController> _searchStrategyList { get; set; }
-    public SearchStrategyFactory(List<ISearchController> searchStrategyList) => _searchStrategyList = searchStrategyList;
+    private IEnumerable<ISearchController> _searchStrategyList { get; set; }
+    public SearchStrategyFactory(IEnumerable<ISearchController> searchStrategyList) => _searchStrategyList = searchStrategyList;
 
     public ISearchController MakeSearchController(SearchStrategyType searchType)
     {
