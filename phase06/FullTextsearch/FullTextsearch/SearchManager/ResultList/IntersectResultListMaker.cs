@@ -15,7 +15,11 @@ public class IntersectResultListMaker : IResultListMaker
 
         foreach (var word in keyList)
         {
-            resultList.IntersectWith(myInvertedIndex.GetValue(word));
+            //resultList.IntersectWith(myInvertedIndex.GetValue(word));
+            resultList = resultList.Join(myInvertedIndex.GetValue(word),
+                l1 => l1.GetValue(),
+                l2 => l2.GetValue(),
+                (l1, l2) => l1).ToHashSet();
         }
 
         return resultList;

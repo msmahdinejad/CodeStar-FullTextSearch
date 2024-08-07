@@ -41,7 +41,6 @@ public class InvertedIndexController : IInvertedIndex
         {
             return new HashSet<ISearchable>(_map[word]);
         }
-
         return new HashSet<ISearchable>();
     }
 

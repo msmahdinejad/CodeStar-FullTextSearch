@@ -5,26 +5,26 @@ using FullTextsearch.Model;
 
 namespace FullTextsearch.InvertedIndex;
 
-public class InvertedIndexDbController :IInvertedIndex
+public class InvertedIndexDbController : IInvertedIndex
 {
-    private ApplicationDbContext _applicationDbContext=new();
-    
+    private ApplicationDbContext _applicationDbContext = new();
+
     public void AddDataToMap(ISearchable myData, IExtractor myExtractor)
     {
-        var invertedIndexMap = _applicationDbContext.InvertedIndexMap.ToList();
+        var invertedIndexMap = _applicationDbContext.InvertedIndexMap;
         foreach (var key in myExtractor.GetKey(myData))
         {
-            var record = invertedIndexMap.SingleOrDefault(x => x.Key == key);
+            var record = invertedIndexMap.FirstOrDefault(x => x.Key == key);
             if (record != null)
             {
-                var tmp = record.Values.ToList();
+                var tmp = record.Values.ToHashSet();
                 tmp.Add(myData.GetValue());
                 record.Values = tmp.ToArray();
             }
             else
             {
-                var newRecord = new InvertedIndexRecord(){Key = key, Values = [myData.GetValue()] };
-                invertedIndexMap.Add(newRecord);
+                var newRecord = new InvertedIndexRecord() { Key = key, Values = [myData.GetValue()] };
+                _applicationDbContext.InvertedIndexMap.Add(newRecord);
             }
         }
 
@@ -36,15 +36,16 @@ public class InvertedIndexDbController :IInvertedIndex
         foreach (var data in dataList)
         {
             AddDataToMap(data, myExtractor);
-        }    }
+        }
+    }
 
     public HashSet<ISearchable> GetValue(string word)
     {
-        var invertedIndexMap = _applicationDbContext.InvertedIndexMap.ToList();
-        var record = invertedIndexMap.SingleOrDefault(x => x.Key == word);
-        if (record!= null)
+        var invertedIndexMap = _applicationDbContext.InvertedIndexMap.ToList().Select(x => new {key = x.Key, values = x.Values.ToList().Select(x => new DbValue.DbValue(x))});
+        var record = invertedIndexMap.FirstOrDefault(x => x.key == word);
+        if (record != null)
         {
-            return new HashSet<ISearchable>(record.Values.ToList().Select(x => new DbValue.DbValue(x)));
+            return new HashSet<ISearchable>(record.values);
         }
 
         return new HashSet<ISearchable>();
@@ -59,6 +60,7 @@ public class InvertedIndexDbController :IInvertedIndex
         {
             result.UnionWith(dbValues);
         }
+
         return result;
     }
 }

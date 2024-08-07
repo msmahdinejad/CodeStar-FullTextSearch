@@ -23,7 +23,7 @@ public class SearchInitializer(
 
         DataFolderReader = inputDataFolderReaderFactory.MakeDataFolderReader(className);
         var dataList = DataFolderReader.ReadDataListFromFolder(folderPath, textEditor);
-        invertedIndex.AddDataListToMap(dataList, extractor);
+        //invertedIndex.AddDataListToMap(dataList, extractor);
         SearchController = inputSearchStrategyFactory.MakeSearchController(searchType);
     }
     public HashSet<ISearchable> Search(IQuery query)
