@@ -24,7 +24,7 @@ public class SearchApiController : ControllerBase
     public SearchApiController()
     {
         _processor = new SearchInitializer(new DataFolderReaderFactory([new DocumentFolderReader()]),
-            new InvertedIndexController(),
+            new InvertedIndexDbController(),
             new SearchStrategyFactory([new SignedSearchController(new NegativeWordFinder(), new PositiveWordFinder(), new UnsignedWordFinder(), new IntersectResultListMaker(), new UnionResultListMaker(), new SignedSearchStrategy())]),
             new DocumentTextEditor(), new AdvancedDocumentWordsExtractor());
         
