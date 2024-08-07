@@ -8,39 +8,49 @@ namespace FullTextsearch.SearchManager.SignedSearchManager;
 
 public class SignedSearchController : ISearchController
 {
-    private IWordFinder _negativeWordFinder;
-    private IWordFinder _positiveWordFinder;
-    private IWordFinder _unsignedWordFinder;
-
-    private IResultListMaker _intersectResultListMaker;
-    private IResultListMaker _unionResultListMaker;
-
     private ISignedSearchStrategy _signedSearchStrategy;
+
+    private IEnumerable<IWordFinder> _wordFinders;
+    private Dictionary<WordFinderType, HashSet<string>> _dictionaryWordFinder;
+
+    private IEnumerable<IResultListMaker> _resultListMakers;
+    private Dictionary<ResultListMakerType, IResultListMaker> _dictionaryResultListMaker;
 
     public SearchStrategyType SearchStrategyName => SearchStrategyType.SignedSearch;
 
 
-    public SignedSearchController(IWordFinder negativeWordFinder, IWordFinder positiveWordFinder,
-        IWordFinder unsignedWordFinder, IResultListMaker intersectResultListMaker,
-        IResultListMaker unionResultListMaker, ISignedSearchStrategy signedSearchStrategy)
+    public SignedSearchController(IEnumerable<IWordFinder> wordFinders, IEnumerable<IResultListMaker> resultListMakers,
+        ISignedSearchStrategy signedSearchStrategy)
     {
-        _negativeWordFinder = negativeWordFinder;
-        _positiveWordFinder = positiveWordFinder;
-        _unsignedWordFinder = unsignedWordFinder;
-        _intersectResultListMaker = intersectResultListMaker;
-        _unionResultListMaker = unionResultListMaker;
         _signedSearchStrategy = signedSearchStrategy;
+        _wordFinders = wordFinders;
+        _resultListMakers = resultListMakers;
+
+        _dictionaryWordFinder = new();
+        _dictionaryResultListMaker = new();
     }
 
     public HashSet<ISearchable> SearchWithQuery(IQuery inputQuery, IInvertedIndex myInvertedIndex)
     {
-        var unSignedWords = _unsignedWordFinder.FindWords(inputQuery.SplitedText);
-        var positiveWords = _positiveWordFinder.FindWords(inputQuery.SplitedText);
-        var negativeWords = _negativeWordFinder.FindWords(inputQuery.SplitedText);
-        var unSignedResult = _intersectResultListMaker.MakeResultList(unSignedWords, myInvertedIndex);
-        var positiveResult = _unionResultListMaker.MakeResultList(positiveWords, myInvertedIndex);
-        var negativeResult = _unionResultListMaker.MakeResultList(negativeWords, myInvertedIndex);
-        var finalResult = _signedSearchStrategy.GetResult(unSignedWords, positiveWords, negativeWords, unSignedResult, positiveResult, negativeResult, myInvertedIndex.GetAllValue());
+        foreach (var wordFinder in _wordFinders)
+        {
+            _dictionaryWordFinder[wordFinder.Type] = wordFinder.FindWords(inputQuery.SplitedText);
+        }
+
+        foreach (var resultListMaker in _resultListMakers)
+        {
+            _dictionaryResultListMaker[resultListMaker.Type] = resultListMaker;
+        }
+
+        var unSignedResult = _dictionaryResultListMaker[ResultListMakerType.Intersect]
+            .MakeResultList(_dictionaryWordFinder[WordFinderType.Unsigned], myInvertedIndex);
+        var positiveResult = _dictionaryResultListMaker[ResultListMakerType.Union]
+            .MakeResultList(_dictionaryWordFinder[WordFinderType.Positive], myInvertedIndex);
+        var negativeResult = _dictionaryResultListMaker[ResultListMakerType.Union]
+            .MakeResultList(_dictionaryWordFinder[WordFinderType.Negative], myInvertedIndex);
+        var finalResult = _signedSearchStrategy.GetResult(_dictionaryWordFinder[WordFinderType.Unsigned],
+            _dictionaryWordFinder[WordFinderType.Positive], _dictionaryWordFinder[WordFinderType.Negative],
+            unSignedResult, positiveResult, negativeResult, myInvertedIndex.GetAllValue());
         return finalResult;
     }
 }

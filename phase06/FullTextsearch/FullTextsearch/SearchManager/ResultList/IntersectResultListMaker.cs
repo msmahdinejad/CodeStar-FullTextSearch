@@ -5,6 +5,8 @@ namespace FullTextsearch.SearchManager.ResultList;
 
 public class IntersectResultListMaker : IResultListMaker
 {
+    public ResultListMakerType Type { get; init; } = ResultListMakerType.Intersect;
+
     public HashSet<ISearchable> MakeResultList(HashSet<string> keyList, IInvertedIndex myInvertedIndex)
     {
         HashSet<ISearchable> resultList = new HashSet<ISearchable>();

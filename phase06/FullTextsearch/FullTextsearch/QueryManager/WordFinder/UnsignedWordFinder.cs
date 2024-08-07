@@ -9,7 +9,8 @@ public class UnsignedWordFinder : IWordFinder
 
     private const char NegativeChar = '-';
 
-
+    public WordFinderType Type { get; init; } = WordFinderType.Unsigned;
+    
     public HashSet<string> FindWords(string[] words)
     {
         var result = words

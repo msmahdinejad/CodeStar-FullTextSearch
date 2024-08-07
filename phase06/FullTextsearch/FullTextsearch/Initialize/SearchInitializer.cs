@@ -11,17 +11,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace FullTextsearch.Initialize;
 
 public class SearchInitializer(
-    [FromServices] IDataFolderReaderFactory inputDataFolderReaderFactory,
-    [FromServices] IInvertedIndex invertedIndex,
-    [FromServices] ISearchStrategyFactory inputSearchStrategyFactory,
-    [FromServices] ITextEditor textEditor, [FromServices] IExtractor extractor)
+    IDataFolderReaderFactory inputDataFolderReaderFactory,
+    IInvertedIndex invertedIndex,
+    ISearchStrategyFactory inputSearchStrategyFactory,
+    ITextEditor textEditor, IExtractor extractor)
     : ISearchInitializer
 {
     public ISearchController SearchController { get; set; }
     public IDataFolderReader DataFolderReader { get; set; }
     public void Build(DataType className, string folderPath, SearchStrategyType searchType)
     {
-
         DataFolderReader = inputDataFolderReaderFactory.MakeDataFolderReader(className);
         var dataList = DataFolderReader.ReadDataListFromFolder(folderPath, textEditor);
         invertedIndex.AddDataListToMap(dataList, extractor);

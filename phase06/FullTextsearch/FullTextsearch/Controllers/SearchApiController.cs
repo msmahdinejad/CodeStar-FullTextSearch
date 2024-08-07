@@ -20,12 +20,10 @@ namespace FullTextsearch.Controllers;
 [ApiController]
 public class SearchApiController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
     private readonly ISearchInitializer _searchInitializer;
     
-    public SearchApiController(ApplicationDbContext context, ISearchInitializer searchInitializer)
+    public SearchApiController(ISearchInitializer searchInitializer)
     {
-        _context = context;
         _searchInitializer = searchInitializer;
         
         _searchInitializer.Build(DataType.Document, resources.Resources.FolderPath, SearchStrategyType.SignedSearch);

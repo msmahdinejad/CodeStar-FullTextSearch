@@ -6,6 +6,8 @@ public class NegativeWordFinder : IWordFinder
     public static NegativeWordFinder Instance => _negativeWordFinder ??= new NegativeWordFinder();
     private const char NegativeChar = '-';
 
+    public WordFinderType Type { get; init; } = WordFinderType.Negative;
+
     public HashSet<string> FindWords(string[] words)
     {
         var result = words

@@ -6,7 +6,8 @@ public class PositiveWordFinder : IWordFinder
     public static PositiveWordFinder Instance => _positiveWordFinder ??= new PositiveWordFinder();
     private const char PositiveChar = '+';
 
-
+    public WordFinderType Type { get; init; } = WordFinderType.Positive;
+        
     public HashSet<string> FindWords(string[] words)
     {
         var result = words
