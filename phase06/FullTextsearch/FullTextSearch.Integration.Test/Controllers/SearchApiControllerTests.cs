@@ -14,7 +14,7 @@ public class SearchApiControllerTests(WebApplicationFactory<Program> factory)
     {
         // Arrange
         var queryText = "have";
-        var requestUri = $"FullTextSearch/Search/{queryText}";
+        var requestUri = $"/FullTextSearch/Search/{queryText}";
 
         // Act
         var response = await _client.GetAsync(requestUri);
@@ -32,7 +32,7 @@ public class SearchApiControllerTests(WebApplicationFactory<Program> factory)
     {
         // Arrange
         var queryText = "xxxxxxxxxxxxx";
-        var requestUri = $"FullTextSearch/Search/{queryText}";
+        var requestUri = $"/FullTextSearch/Search/{queryText}";
 
         // Act
         var response = await _client.GetAsync(requestUri);
