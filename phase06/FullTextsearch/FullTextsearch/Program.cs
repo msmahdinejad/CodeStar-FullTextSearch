@@ -22,20 +22,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddTransient<IExtractor, AdvancedDocumentWordsExtractor>();
-builder.Services.AddTransient<ITextEditor, DocumentTextEditor>();
-builder.Services.AddTransient<ISignedSearchStrategy, SignedSearchStrategy>();
-builder.Services.AddTransient<IResultListMaker, IntersectResultListMaker>();
-builder.Services.AddTransient<IResultListMaker, UnionResultListMaker>();
-builder.Services.AddTransient<IWordFinder, PositiveWordFinder>();
-builder.Services.AddTransient<IWordFinder, NegativeWordFinder>();
-builder.Services.AddTransient<IWordFinder, UnsignedWordFinder>();
+builder.Services.AddSingleton<IExtractor, AdvancedDocumentWordsExtractor>();
+builder.Services.AddSingleton<ITextEditor, DocumentTextEditor>();
+builder.Services.AddSingleton<ISignedSearchStrategy, SignedSearchStrategy>();
+builder.Services.AddSingleton<IResultListMaker, IntersectResultListMaker>();
+builder.Services.AddSingleton<IResultListMaker, UnionResultListMaker>();
+builder.Services.AddSingleton<IWordFinder, PositiveWordFinder>();
+builder.Services.AddSingleton<IWordFinder, NegativeWordFinder>();
+builder.Services.AddSingleton<IWordFinder, UnsignedWordFinder>();
 builder.Services.AddTransient<IInvertedIndex, InvertedIndexDbController>();
-builder.Services.AddTransient<IDataFolderReader, DocumentFolderReader>();
-builder.Services.AddTransient<IDataFolderReaderFactory, DataFolderReaderFactory>();
-builder.Services.AddTransient<ISearchStrategyFactory, SearchStrategyFactory>();
-builder.Services.AddTransient<ISearchController, SignedSearchController>();
-builder.Services.AddTransient<ISearchInitializer, SearchInitializer>();
+builder.Services.AddSingleton<ISearchStrategyFactory, SearchStrategyFactory>();
+builder.Services.AddSingleton<ISearchController, SignedSearchController>();
+builder.Services.AddScoped<ISearchInitializer, SearchInitializer>();
 
 var app = builder.Build();
 
@@ -52,4 +50,6 @@ app.MapControllers();
 
 app.Run();
 
-public partial class Program { }
+public partial class Program
+{
+}
