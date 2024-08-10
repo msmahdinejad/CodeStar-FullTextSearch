@@ -50,6 +50,6 @@ public class HomeController : ControllerBase
 
         var doc = _apiService.AddDocument(file);
         
-        return Ok(doc);
+        return Ok(new {Name = doc.Result.DocName, Text = doc.Result.Text});
     }
 }

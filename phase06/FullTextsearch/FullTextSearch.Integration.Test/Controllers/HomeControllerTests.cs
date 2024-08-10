@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
+﻿using System.Net.Http.Headers;
+using System.Text;
+using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace FullTextSearch.Integration.Test.Controllers;
 
@@ -14,7 +15,7 @@ public class HomeControllerTests(WebApplicationFactory<Program> factory)
     {
         // Arrange
         var queryText = "have";
-        var requestUri = $"/FullTextSearch/Search/{queryText}";
+        var requestUri = $"/Home/SearchWithQuery/{queryText}";
 
         // Act
         var response = await _client.GetAsync(requestUri);
@@ -32,12 +33,61 @@ public class HomeControllerTests(WebApplicationFactory<Program> factory)
     {
         // Arrange
         var queryText = "xxxxxxxxxxxxx";
-        var requestUri = $"/FullTextSearch/Search/{queryText}";
+        var requestUri = $"/Home/SearchWithQuery/{queryText}";
 
         // Act
         var response = await _client.GetAsync(requestUri);
 
         // Assert
         Assert.Equal(System.Net.HttpStatusCode.NotFound, response.StatusCode);
+    }
+    
+    [Fact]
+    public async Task UploadFile_ShouldReturnsCurrentDoc_WhenFileIsValid()
+    {
+        // Arrange
+        var fileName = "test.txt";
+        var contentType = "text/plain";
+        var fileContents = Encoding.UTF8.GetBytes("This is a test file.");
+
+        var content = new MultipartFormDataContent();
+        var fileContent = new ByteArrayContent(fileContents);
+        fileContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+        content.Add(fileContent, "file", fileName);
+
+        // Act
+        var response = await _client.PostAsync("/Home/UploadFile/upload", content);
+
+        // Assert
+        Assert.True(response.IsSuccessStatusCode, "Response status code does not indicate success.");
+        
+        var responseString = await response.Content.ReadAsStringAsync();
+
+        Assert.Contains("test.txt", responseString);
+        Assert.Contains("This is a test file.", responseString);
+    }
+    
+    [Fact]
+    public async Task UploadFile_WithEmptyFile_ReturnsBadRequest()
+    {
+        // Arrange
+        var fileName = "empty.txt";
+        var contentType = "text/plain";
+        var fileContents = new byte[0];
+
+        var content = new MultipartFormDataContent();
+        var fileContent = new ByteArrayContent(fileContents);
+        fileContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+        content.Add(fileContent, "file", fileName);
+
+        // Act
+        var response = await _client.PostAsync("/Home/UploadFile/upload", content);
+
+        // Assert
+        Assert.False(response.IsSuccessStatusCode, "Expected response status code to indicate failure.");
+        Assert.Equal(System.Net.HttpStatusCode.BadRequest, response.StatusCode);
+        
+        var responseString = await response.Content.ReadAsStringAsync();
+        Assert.Contains("No file uploaded", responseString);
     }
 }
