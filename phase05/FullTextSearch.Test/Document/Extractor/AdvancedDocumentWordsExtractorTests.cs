@@ -6,12 +6,19 @@ namespace FullTextSearch.Test.Document.Extractor;
 
 public class AdvancedDocumentWordsExtractorTests
 {
+    private AdvancedDocumentWordsExtractor sut;
+    private Mock<ISearchable> dataMock;
+
+    public AdvancedDocumentWordsExtractorTests()
+    {
+        sut = new AdvancedDocumentWordsExtractor();
+        dataMock = new Mock<ISearchable>();
+    }
+    
     [Fact]
     public void GetKey_ShouldCallGetWordsMethod_Whenenver()
     {
         // Arrange
-        var sut = new AdvancedDocumentWordsExtractor();
-        var dataMock = new Mock<ISearchable>();
         dataMock.Setup(x => x.GetWords()).Returns(new List<string>());
         
         // Act
@@ -25,8 +32,6 @@ public class AdvancedDocumentWordsExtractorTests
     public void GetKey_ShouldReturnCorrectList_Whenenver()
     {
         // Arrange
-        var sut = new AdvancedDocumentWordsExtractor();
-        var dataMock = new Mock<ISearchable>();
         dataMock.Setup(x => x.GetWords()).Returns(new List<string>(){"1" , "2" , "3"});
         var expectedResult = new List<string>() { "1", "2", "3", "1 2", "2 3", "1 2 3" };
         
