@@ -2,9 +2,7 @@
 
 public class NegativeWordFinder : IWordFinder
 {
-    private static NegativeWordFinder _negativeWordFinder;
-    public static NegativeWordFinder Instance => _negativeWordFinder ??= new NegativeWordFinder();
-    private const char NegativeChar = '-';
+    private readonly char NegativeChar = '-';
 
     public WordFinderType Type { get; init; } = WordFinderType.Negative;
 

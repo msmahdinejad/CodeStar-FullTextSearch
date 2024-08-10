@@ -2,9 +2,7 @@
 
 public class PositiveWordFinder : IWordFinder
 {
-    private static PositiveWordFinder _positiveWordFinder;
-    public static PositiveWordFinder Instance => _positiveWordFinder ??= new PositiveWordFinder();
-    private const char PositiveChar = '+';
+    private readonly char PositiveChar = '+';
 
     public WordFinderType Type { get; init; } = WordFinderType.Positive;
         

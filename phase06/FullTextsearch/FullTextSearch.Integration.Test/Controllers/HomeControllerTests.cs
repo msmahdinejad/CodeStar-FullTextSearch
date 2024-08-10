@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace FullTextSearch.Integration.Test.Controllers;
 
-public class SearchApiControllerTests(WebApplicationFactory<Program> factory)
+public class HomeControllerTests(WebApplicationFactory<Program> factory)
     : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client = factory.CreateClient();

@@ -11,29 +11,28 @@ using FullTextsearch.QueryModel;
 using FullTextsearch.SearchManager;
 using FullTextsearch.SearchManager.ResultList;
 using FullTextsearch.SearchManager.SignedSearchManager;
+using FullTextsearch.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FullTextsearch.Controllers;
 
 
-[Route("api/Home/[action]")]
+[Route("[controller]/[action]")]
 [ApiController]
-public class SearchApiController : ControllerBase
+public class HomeController : ControllerBase
 {
-    private readonly ISearchInitializer _searchInitializer;
-    
-    public SearchApiController(ISearchInitializer searchInitializer)
+    private readonly IApiService _apiService;
+
+    public HomeController(IApiService apiService)
     {
-        _searchInitializer = searchInitializer;
-        
-        _searchInitializer.Build(SearchStrategyType.SignedSearch);
+        _apiService = apiService;
     }
-    
+
+
     [HttpGet("{queryText}")]
     public IActionResult SearchWithQuery([FromRoute]string queryText)
     {
-        var query = new AdvancedQuery(queryText);
-        var result = _searchInitializer.Search(query);
+        var result = _apiService.Search(queryText);
         if (result.Count == 0)
         {
             return NotFound();
@@ -49,22 +48,8 @@ public class SearchApiController : ControllerBase
             return BadRequest("No file uploaded.");
         }
 
-        var fileName = file.FileName;
+        var doc = _apiService.AddDocument(file);
         
-        string fileContent;
-        using (var reader = new StreamReader(file.OpenReadStream()))
-        {
-            fileContent = await reader.ReadToEndAsync();
-        }
-
-        var data = new Document.Document(fileName, fileContent, new DocumentTextEditor());
-        
-        _searchInitializer.AddData(data);
-        
-        return Ok(new 
-        {
-            FileName = fileName,
-            Content = fileContent
-        });
+        return Ok(doc);
     }
 }

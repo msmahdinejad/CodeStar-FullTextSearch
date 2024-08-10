@@ -2,12 +2,9 @@
 
 public class UnsignedWordFinder : IWordFinder
 {
-    private static UnsignedWordFinder _unsignedWordFinder;
-    public static UnsignedWordFinder Instance => _unsignedWordFinder ??= new UnsignedWordFinder();
-    
-    private const char PositiveChar = '+';
+    private readonly char PositiveChar = '+';
 
-    private const char NegativeChar = '-';
+    private readonly char NegativeChar = '-';
 
     public WordFinderType Type { get; init; } = WordFinderType.Unsigned;
     
