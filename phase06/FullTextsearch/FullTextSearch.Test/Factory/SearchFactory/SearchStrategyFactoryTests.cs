@@ -3,6 +3,8 @@ using FullTextsearch.Factory.SearchFactory;
 using FullTextsearch.SearchManager;
 using Moq;
 
+namespace FullTextSearch.Test.Factory.SearchFactory;
+
 public class SearchStrategyFactoryTests
 {
     private readonly SearchStrategyFactory _searchStrategyFactory;

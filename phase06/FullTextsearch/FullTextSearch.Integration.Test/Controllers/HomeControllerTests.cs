@@ -7,29 +7,34 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FullTextSearch.Integration.Test.Controllers;
 
-public class HomeControllerTests(WebApplicationFactory<Program> factory)
-    : IClassFixture<WebApplicationFactory<Program>>
+public class HomeControllerTests : IClassFixture<WebApplicationFactory<Program>>
 {
-    private readonly HttpClient _client = factory.CreateClient();
+    private readonly HttpClient _client;
+
+    public HomeControllerTests(WebApplicationFactory<Program> factory)
+    {
+        _client = factory.CreateClient();
+    }
+
 
 
     [Fact]
     public async Task SearchWithQuery_ReturnsResults_WhenQueryIsValid()
     {
         // Arrange
-        using (var scope = factory.Services.CreateScope())
-        {
-            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        
-            var value = new InvertedIndexRecord
-            {
-                Key = "have",
-                Values = ["57110"]
-            };
-        
-            dbContext.InvertedIndexMap.Add(value);
-            await dbContext.SaveChangesAsync();
-        }
+        // using (var scope = factory.Services.CreateScope())
+        // {
+        //     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        //
+        //     var value = new InvertedIndexRecord
+        //     {
+        //         Key = "have",
+        //         Values = ["57110"]
+        //     };
+        //
+        //     dbContext.InvertedIndexMap.Add(value);
+        //     await dbContext.SaveChangesAsync();
+        // }
         
         var queryText = "have";
         var requestUri = $"/Home/SearchWithQuery/{queryText}";

@@ -1,6 +1,14 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=79789286_002Dc78e_002D4eee_002D82a5_002D611ff0b59a1d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SearchApiControllerTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3f1c3303_002D1a31_002D4c29_002Db474_002D23db17e216b5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UploadFile_ShouldReturnOk_WhenFileIsUploaded #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=79789286_002Dc78e_002D4eee_002D82a5_002D611ff0b59a1d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SearchApiControllerTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dd688fdd_002D28c7_002D4f0f_002Daa45_002D61434443a7c3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UploadFile_ShouldReturnOk_WhenFileIsUploaded" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::B6E76215-0F03-4DB9-A51C-E0E67B37B705::net8.0::FullTextSearch.Tests.Controllers.HomeControllerTests.UploadFile_ShouldReturnOk_WhenFileIsUploaded&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=FullTextsearch_002Fresources_002FResources/@EntryIndexedValue">True</s:Boolean>
 	

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using FullTextsearch.Document;
+﻿using FullTextsearch.Document;
 using FullTextsearch.Document.Extractor;
 using FullTextsearch.Factory.SearchFactory;
 using FullTextsearch.Initialize;
@@ -8,7 +6,8 @@ using FullTextsearch.InvertedIndex;
 using FullTextsearch.QueryModel;
 using FullTextsearch.SearchManager;
 using Moq;
-using Xunit;
+
+namespace FullTextSearch.Test.Initialize;
 
 public class SearchInitializerTests
 {

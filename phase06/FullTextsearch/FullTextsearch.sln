@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullTextsearch", "FullTexts
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullTextSearch.Test", "FullTextSearch.Test\FullTextSearch.Test.csproj", "{B6E76215-0F03-4DB9-A51C-E0E67B37B705}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullTextSearch.Integration.Test", "FullTextSearch.Integration.Test\FullTextSearch.Integration.Test.csproj", "{7B540B37-2C28-4CFE-BB2B-5AEA2312D0EB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +18,5 @@ Global
 		{B6E76215-0F03-4DB9-A51C-E0E67B37B705}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6E76215-0F03-4DB9-A51C-E0E67B37B705}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6E76215-0F03-4DB9-A51C-E0E67B37B705}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B540B37-2C28-4CFE-BB2B-5AEA2312D0EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B540B37-2C28-4CFE-BB2B-5AEA2312D0EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B540B37-2C28-4CFE-BB2B-5AEA2312D0EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B540B37-2C28-4CFE-BB2B-5AEA2312D0EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

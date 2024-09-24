@@ -1,8 +1,6 @@
 using FullTextsearch.Context;
-using FullTextsearch.Document;
 using FullTextsearch.Document.Extractor;
 using FullTextsearch.Document.Formater;
-using FullTextsearch.Factory.FolderFactory;
 using FullTextsearch.Factory.SearchFactory;
 using FullTextsearch.Initialize;
 using FullTextsearch.InvertedIndex;
@@ -63,6 +61,9 @@ void AddDi(WebApplicationBuilder builder)
     builder.Services.AddScoped<IApiService, ApiService>();
 }
 
-public partial class Program
+namespace FullTextsearch
 {
+    public partial class Program
+    {
+    }
 }
