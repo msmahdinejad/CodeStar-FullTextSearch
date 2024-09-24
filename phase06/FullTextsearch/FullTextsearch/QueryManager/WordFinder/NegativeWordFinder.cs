@@ -6,7 +6,7 @@ public class NegativeWordFinder : IWordFinder
 
     public WordFinderType Type { get; init; } = WordFinderType.Negative;
 
-    public HashSet<string> FindWords(string[] words)
+    public HashSet<string> FindWords(IEnumerable<string> words)
     {
         var result = words
             .Where(word => word[0] == NegativeChar)

@@ -8,7 +8,7 @@ public class UnsignedWordFinder : IWordFinder
 
     public WordFinderType Type { get; init; } = WordFinderType.Unsigned;
     
-    public HashSet<string> FindWords(string[] words)
+    public HashSet<string> FindWords(IEnumerable<string> words)
     {
         var result = words
             .Where(word => word[0] != PositiveChar && word[0] != NegativeChar)

@@ -1,45 +1,43 @@
 ﻿using FullTextsearch.Exceptions;
 using FullTextsearch.Factory.SearchFactory;
-using FullTextsearch.QueryManager.WordFinder;
 using FullTextsearch.SearchManager;
-using FullTextsearch.SearchManager.ResultList;
-using FullTextsearch.SearchManager.SignedSearchManager;
-
-namespace FullTextSearch.Test.Factory.SearchFactory;
+using Moq;
 
 public class SearchStrategyFactoryTests
 {
-    private readonly SearchStrategyFactory _sut;
-
+    private readonly SearchStrategyFactory _searchStrategyFactory;
+    private readonly Mock<ISearchController> _mockSignedSearchController;
     public SearchStrategyFactoryTests()
     {
-        _sut = new SearchStrategyFactory([new SignedSearchController(new NegativeWordFinder(), new PositiveWordFinder(), new UnsignedWordFinder(), new IntersectResultListMaker(), new UnionResultListMaker(), new SignedSearchStrategy())]);
+        // Setup mock controllers
+        _mockSignedSearchController = new Mock<ISearchController>();
+        _mockSignedSearchController.Setup(c => c.SearchStrategyName).Returns(SearchStrategyType.SignedSearch);
+        
+
+        // Setup factory with a list of mocked controllers
+        _searchStrategyFactory = new SearchStrategyFactory(new List<ISearchController>
+        {
+            _mockSignedSearchController.Object,
+        });
     }
 
     [Fact]
-    public void MakeSearchController_ShouldReturnsCorrectSearchController_WhenSearchStrategyTypeIsOk()
+    public void MakeSearchController_ShouldReturnCorrectController_ForValidSearchStrategyType()
     {
-        //Arrange
-        var searchStrategy = SearchStrategyType.SignedSearch;
-        var searchController = new SignedSearchController(new NegativeWordFinder(), new PositiveWordFinder(), new UnsignedWordFinder(), new IntersectResultListMaker(), new UnionResultListMaker(), new SignedSearchStrategy());
-        
-        //Act
-        var result = _sut.MakeSearchController(searchStrategy);
+        // Act: Get the controller for SignedSearch
+        var result = _searchStrategyFactory.MakeSearchController(SearchStrategyType.SignedSearch);
 
-        //Assert
-        Assert.Equal(result.GetType(), searchController.GetType());
+        // Assert: The correct controller should be returned
+        Assert.NotNull(result);
+        Assert.Equal(_mockSignedSearchController.Object, result);
+    }
+
+    [Fact]
+    public void MakeSearchController_ShouldThrowInvalidSearchStrategy_ForInvalidSearchStrategyType()
+    {
+        // Act & Assert: Verify that an InvalidSearchStrategy exception is thrown for an invalid strategy
+        Assert.Throws<InvalidSearchStrategy>(() =>
+            _searchStrategyFactory.MakeSearchController((SearchStrategyType)(-2)));
     }
     
-    [Fact]
-    public void MakeSearchController_ShouldReturnsInvalidSearchStrategyException_WhenSearchStrategyTypeIsNotOk()
-    {
-        //Arrange
-        var searchStrategy = (SearchStrategyType)(-2);
-
-        //Act
-        var action = () => _sut.MakeSearchController(searchStrategy);
-
-        //Assert
-        Assert.Throws<InvalidSearchStrategy>(action);
-    }
 }

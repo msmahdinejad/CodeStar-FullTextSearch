@@ -3,5 +3,5 @@
 public interface IWordFinder
 {
     WordFinderType Type { get; init; }
-    HashSet<string> FindWords(string[] words);
+    HashSet<string> FindWords(IEnumerable<string> words);
 }

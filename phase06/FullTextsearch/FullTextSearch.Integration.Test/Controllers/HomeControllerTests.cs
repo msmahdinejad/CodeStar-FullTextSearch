@@ -1,6 +1,9 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
+using FullTextsearch.Context;
+using FullTextsearch.Model;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FullTextSearch.Integration.Test.Controllers;
 
@@ -14,6 +17,20 @@ public class HomeControllerTests(WebApplicationFactory<Program> factory)
     public async Task SearchWithQuery_ReturnsResults_WhenQueryIsValid()
     {
         // Arrange
+        using (var scope = factory.Services.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        
+            var value = new InvertedIndexRecord
+            {
+                Key = "have",
+                Values = ["57110"]
+            };
+        
+            dbContext.InvertedIndexMap.Add(value);
+            await dbContext.SaveChangesAsync();
+        }
+        
         var queryText = "have";
         var requestUri = $"/Home/SearchWithQuery/{queryText}";
 
@@ -24,8 +41,6 @@ public class HomeControllerTests(WebApplicationFactory<Program> factory)
 
         // Assert
         Assert.Contains("57110", content);
-        Assert.Contains("58043", content);
-        Assert.Contains("58044", content);
     }
 
     [Fact]

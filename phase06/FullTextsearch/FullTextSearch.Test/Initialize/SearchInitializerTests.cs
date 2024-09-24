@@ -1,69 +1,90 @@
-﻿using Moq;
-using NSubstitute;
+﻿using System;
+using System.Collections.Generic;
 using FullTextsearch.Document;
 using FullTextsearch.Document.Extractor;
-using FullTextsearch.Document.Formater;
-using FullTextsearch.Factory.FolderFactory;
 using FullTextsearch.Factory.SearchFactory;
 using FullTextsearch.Initialize;
 using FullTextsearch.InvertedIndex;
-using FullTextsearch.QueryManager.WordFinder;
 using FullTextsearch.QueryModel;
 using FullTextsearch.SearchManager;
-using FullTextsearch.SearchManager.ResultList;
-
-namespace FullTextSearch.Test.Initialize;
+using Moq;
+using Xunit;
 
 public class SearchInitializerTests
 {
-    [Fact]
-    public void Build_ShouldCallCorrectMethods_Whenever()
-    {
-        //Arrange
-        var inputDataFolderReaderFactoryMock = new Mock<IDataFolderReaderFactory>();
-        var dataFolderReaderMock = new Mock<IDataFolderReader>();
-        
-        var invertedIndexMock = new Mock<IInvertedIndex>();
-        var inputSearchStrategyFactoryMock = new Mock<ISearchStrategyFactory>();
-        var textEditorMock = new Mock<ITextEditor>();
-        var extractorMock = new Mock<IExtractor>();
-        
-        dataFolderReaderMock.Setup(x => x.ReadDataListFromFolder(It.IsAny<string>(), textEditorMock.Object))
-            .Returns(new List<ISearchable>());
-        inputDataFolderReaderFactoryMock.Setup(x => x.MakeDataFolderReader(DataType.Document))
-            .Returns(dataFolderReaderMock.Object);
+    private readonly Mock<IInvertedIndex> _mockInvertedIndex;
+    private readonly Mock<ISearchStrategyFactory> _mockSearchStrategyFactory;
+    private readonly Mock<IExtractor> _mockExtractor;
+    private readonly Mock<ISearchController> _mockSearchController;
+    private readonly SearchInitializer _searchInitializer;
 
-        var sut = new SearchInitializer(inputDataFolderReaderFactoryMock.Object, invertedIndexMock.Object, inputSearchStrategyFactoryMock.Object, textEditorMock.Object, extractorMock.Object);
-        
-        //Act
-        sut.Build(DataType.Document, "", SearchStrategyType.SignedSearch);
-        
-        //Assert
-        inputDataFolderReaderFactoryMock.Verify(x => x.MakeDataFolderReader(DataType.Document), Times.Once);
-        invertedIndexMock.Verify(x => x.AddDataListToMap(It.IsAny<IEnumerable<ISearchable>>(), extractorMock.Object), Times.Once);
-        inputSearchStrategyFactoryMock.Verify(x => x.MakeSearchController(SearchStrategyType.SignedSearch), Times.Once);
+    public SearchInitializerTests()
+    {
+        // Create mocks for dependencies
+        _mockInvertedIndex = new Mock<IInvertedIndex>();
+        _mockSearchStrategyFactory = new Mock<ISearchStrategyFactory>();
+        _mockExtractor = new Mock<IExtractor>();
+        _mockSearchController = new Mock<ISearchController>();
+
+        // Setup the SearchInitializer with mocked dependencies
+        _searchInitializer = new SearchInitializer(
+            _mockInvertedIndex.Object,
+            _mockSearchStrategyFactory.Object,
+            _mockExtractor.Object);
     }
 
     [Fact]
-    public void Search_ShouldCallCorrectMethods_Whenever()
+    public void Build_ShouldSetSearchController_WhenValidSearchTypeProvided()
     {
-        //Arrange
-        var inputDataFolderReaderFactoryMock = new Mock<IDataFolderReaderFactory>();
-        var invertedIndexMock = new Mock<IInvertedIndex>();
-        var inputSearchStrategyFactoryMock = new Mock<ISearchStrategyFactory>();
-        var textEditorMock = new Mock<ITextEditor>();
-        var extractorMock = new Mock<IExtractor>();
-        
-        var queryMock = new Mock<IQuery>();
-        var searchControllerMock = new Mock<ISearchController>();
-        
-        var sut = new SearchInitializer(inputDataFolderReaderFactoryMock.Object, invertedIndexMock.Object, inputSearchStrategyFactoryMock.Object, textEditorMock.Object, extractorMock.Object);
-        sut.SearchController = searchControllerMock.Object;
-        
-        //Act
-        sut.Search(queryMock.Object);
+        // Arrange
+        var searchType = SearchStrategyType.SignedSearch;
+        _mockSearchStrategyFactory
+            .Setup(factory => factory.MakeSearchController(searchType))
+            .Returns(_mockSearchController.Object);
 
-        //Assert
-        searchControllerMock.Verify(x => x.SearchWithQuery(queryMock.Object, invertedIndexMock.Object), Times.Once);
+        // Act
+        _searchInitializer.Build(searchType);
+
+        // Assert
+        Assert.NotNull(_searchInitializer.SearchController);
+        Assert.Equal(_mockSearchController.Object, _searchInitializer.SearchController);
+    }
+
+    [Fact]
+    public void Search_ShouldInvokeSearchWithQuery_WhenCalled()
+    {
+        // Arrange
+        var query = new Mock<IQuery>();
+        var expectedResults = new HashSet<ISearchable>();
+        
+        _mockSearchStrategyFactory
+            .Setup(factory => factory.MakeSearchController(It.IsAny<SearchStrategyType>()))
+            .Returns(_mockSearchController.Object);
+        
+        _mockSearchController
+            .Setup(controller => controller.SearchWithQuery(query.Object, _mockInvertedIndex.Object))
+            .Returns(expectedResults);
+
+        _searchInitializer.Build(SearchStrategyType.SignedSearch); // Ensure the SearchController is built
+
+        // Act
+        var results = _searchInitializer.Search(query.Object);
+
+        // Assert
+        Assert.Equal(expectedResults, results);
+        _mockSearchController.Verify(controller => controller.SearchWithQuery(query.Object, _mockInvertedIndex.Object), Times.Once);
+    }
+
+    [Fact]
+    public void AddData_ShouldInvokeAddDataToMap_WhenCalled()
+    {
+        // Arrange
+        var data = new Mock<ISearchable>();
+
+        // Act
+        _searchInitializer.AddData(data.Object);
+
+        // Assert
+        _mockInvertedIndex.Verify(index => index.AddDataToMap(data.Object, _mockExtractor.Object), Times.Once);
     }
 }
