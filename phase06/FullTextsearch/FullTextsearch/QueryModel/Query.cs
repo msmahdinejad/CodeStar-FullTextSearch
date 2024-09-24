@@ -1,4 +1,6 @@
-﻿namespace FullTextsearch.QueryModel;
+﻿using FullTextsearch.QueryModel.Abstraction;
+
+namespace FullTextsearch.QueryModel;
 
 public class Query : IQuery
 {

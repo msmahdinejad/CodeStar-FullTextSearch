@@ -1,10 +1,11 @@
-﻿using FullTextsearch.Document;
-using FullTextsearch.Document.Extractor;
-using FullTextsearch.Factory.SearchFactory;
+﻿using FullTextsearch.Document.Abstraction;
+using FullTextsearch.Document.Extractor.Abstraction;
+using FullTextsearch.Factory.SearchFactory.Abstraction;
 using FullTextsearch.Initialize;
-using FullTextsearch.InvertedIndex;
-using FullTextsearch.QueryModel;
+using FullTextsearch.InvertedIndex.Abstraction;
+using FullTextsearch.QueryModel.Abstraction;
 using FullTextsearch.SearchManager;
+using FullTextsearch.SearchManager.Abstraction;
 using Moq;
 
 namespace FullTextSearch.Test.Initialize;
@@ -19,13 +20,10 @@ public class SearchInitializerTests
 
     public SearchInitializerTests()
     {
-        // Create mocks for dependencies
         _mockInvertedIndex = new Mock<IInvertedIndex>();
         _mockSearchStrategyFactory = new Mock<ISearchStrategyFactory>();
         _mockExtractor = new Mock<IExtractor>();
         _mockSearchController = new Mock<ISearchController>();
-
-        // Setup the SearchInitializer with mocked dependencies
         _searchInitializer = new SearchInitializer(
             _mockInvertedIndex.Object,
             _mockSearchStrategyFactory.Object,
@@ -64,7 +62,7 @@ public class SearchInitializerTests
             .Setup(controller => controller.SearchWithQuery(query.Object, _mockInvertedIndex.Object))
             .Returns(expectedResults);
 
-        _searchInitializer.Build(SearchStrategyType.SignedSearch); // Ensure the SearchController is built
+        _searchInitializer.Build(SearchStrategyType.SignedSearch); 
 
         // Act
         var results = _searchInitializer.Search(query.Object);

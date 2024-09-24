@@ -1,6 +1,8 @@
 ﻿using Moq;
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Document.Extractor;
+using FullTextsearch.Document.Extractor.Abstraction;
 using FullTextsearch.Factory.SearchFactory;
 using FullTextsearch.InvertedIndex;
 using FullTextsearch.SearchManager;

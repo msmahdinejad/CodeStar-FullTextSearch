@@ -1,5 +1,6 @@
 ﻿using FullTextsearch.Document;
 using FullTextsearch.Document.Formater;
+using FullTextsearch.Document.Formater.Abstraction;
 using FullTextsearch.Exceptions;
 using FullTextsearch.Utility.Abstractions;
 using Moq;

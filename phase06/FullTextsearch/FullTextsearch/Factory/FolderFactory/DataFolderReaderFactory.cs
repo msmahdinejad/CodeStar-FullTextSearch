@@ -1,5 +1,7 @@
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Exceptions;
+using FullTextsearch.Factory.FolderFactory.Abstraction;
 
 namespace FullTextsearch.Factory.FolderFactory;
 

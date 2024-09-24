@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using FullTextsearch.Document.Formater.Abstraction;
 
 namespace FullTextsearch.Document.Formater;
 public class DocumentTextEditor : ITextEditor

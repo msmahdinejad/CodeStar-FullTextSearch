@@ -1,7 +1,7 @@
-using FullTextsearch.Document;
-using FullTextsearch.Document.Extractor;
+using FullTextsearch.Document.Abstraction;
+using FullTextsearch.Document.Extractor.Abstraction;
 
-namespace FullTextsearch.InvertedIndex;
+namespace FullTextsearch.InvertedIndex.Abstraction;
 
 public interface IInvertedIndex
 {

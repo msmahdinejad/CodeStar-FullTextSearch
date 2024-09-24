@@ -1,4 +1,4 @@
-﻿namespace FullTextsearch.QueryManager.WordFinder;
+﻿namespace FullTextsearch.WordFinder;
 
 public enum WordFinderType
 {

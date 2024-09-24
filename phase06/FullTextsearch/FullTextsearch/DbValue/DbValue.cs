@@ -1,4 +1,5 @@
 ﻿using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 
 namespace FullTextsearch.DbValue;
 

@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NSubstitute.ReceivedExtensions;
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Document.Extractor;
 
 namespace FullTextSearch.Test.Document.Extractor;

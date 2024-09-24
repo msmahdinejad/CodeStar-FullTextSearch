@@ -1,5 +1,6 @@
 ﻿using NSubstitute;
 using FullTextsearch.Document.Formater;
+using FullTextsearch.Document.Formater.Abstraction;
 
 namespace FullTextSearch.Test.Document;
 

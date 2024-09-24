@@ -1,6 +1,8 @@
 ﻿using FullTextsearch.Context;
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Document.Extractor;
+using FullTextsearch.Document.Extractor.Abstraction;
 using FullTextsearch.InvertedIndex;
 using FullTextsearch.Model;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +17,6 @@ public class InvertedIndexDbControllerTests
 
     public InvertedIndexDbControllerTests()
     {
-        // Create an in-memory database for testing
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;

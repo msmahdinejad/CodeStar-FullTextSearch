@@ -1,5 +1,7 @@
 using FullTextsearch.Exceptions;
+using FullTextsearch.Factory.SearchFactory.Abstraction;
 using FullTextsearch.SearchManager;
+using FullTextsearch.SearchManager.Abstraction;
 
 namespace FullTextsearch.Factory.SearchFactory;
 

@@ -1,6 +1,7 @@
 ﻿using FullTextsearch.Exceptions;
 using FullTextsearch.Factory.SearchFactory;
 using FullTextsearch.SearchManager;
+using FullTextsearch.SearchManager.Abstraction;
 using Moq;
 
 namespace FullTextSearch.Test.Factory.SearchFactory;
@@ -11,12 +12,9 @@ public class SearchStrategyFactoryTests
     private readonly Mock<ISearchController> _mockSignedSearchController;
     public SearchStrategyFactoryTests()
     {
-        // Setup mock controllers
         _mockSignedSearchController = new Mock<ISearchController>();
         _mockSignedSearchController.Setup(c => c.SearchStrategyName).Returns(SearchStrategyType.SignedSearch);
         
-
-        // Setup factory with a list of mocked controllers
         _searchStrategyFactory = new SearchStrategyFactory(new List<ISearchController>
         {
             _mockSignedSearchController.Object,
@@ -26,10 +24,10 @@ public class SearchStrategyFactoryTests
     [Fact]
     public void MakeSearchController_ShouldReturnCorrectController_ForValidSearchStrategyType()
     {
-        // Act: Get the controller for SignedSearch
+        // Act
         var result = _searchStrategyFactory.MakeSearchController(SearchStrategyType.SignedSearch);
 
-        // Assert: The correct controller should be returned
+        // Assert
         Assert.NotNull(result);
         Assert.Equal(_mockSignedSearchController.Object, result);
     }
@@ -37,7 +35,7 @@ public class SearchStrategyFactoryTests
     [Fact]
     public void MakeSearchController_ShouldThrowInvalidSearchStrategy_ForInvalidSearchStrategyType()
     {
-        // Act & Assert: Verify that an InvalidSearchStrategy exception is thrown for an invalid strategy
+        // Act & Assert
         Assert.Throws<InvalidSearchStrategy>(() =>
             _searchStrategyFactory.MakeSearchController((SearchStrategyType)(-2)));
     }

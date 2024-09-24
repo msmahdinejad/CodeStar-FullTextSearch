@@ -1,11 +1,18 @@
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Document.Extractor;
+using FullTextsearch.Document.Extractor.Abstraction;
 using FullTextsearch.Document.Formater;
 using FullTextsearch.Factory.FolderFactory;
 using FullTextsearch.Factory.SearchFactory;
+using FullTextsearch.Factory.SearchFactory.Abstraction;
+using FullTextsearch.Initialize.Abstarction;
 using FullTextsearch.InvertedIndex;
+using FullTextsearch.InvertedIndex.Abstraction;
 using FullTextsearch.QueryModel;
+using FullTextsearch.QueryModel.Abstraction;
 using FullTextsearch.SearchManager;
+using FullTextsearch.SearchManager.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FullTextsearch.Initialize;

@@ -1,8 +1,11 @@
 ﻿using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Document.Formater;
 using FullTextsearch.Initialize;
+using FullTextsearch.Initialize.Abstarction;
 using FullTextsearch.QueryModel;
 using FullTextsearch.SearchManager;
+using FullTextsearch.Service.Abstraction;
 
 namespace FullTextsearch.Service;
 

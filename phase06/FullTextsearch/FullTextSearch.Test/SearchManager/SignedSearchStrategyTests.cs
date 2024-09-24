@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Document.Formater;
 using FullTextsearch.SearchManager;
 using FullTextsearch.SearchManager.SignedSearchManager;

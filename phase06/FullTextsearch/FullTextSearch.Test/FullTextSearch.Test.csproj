@@ -27,4 +27,8 @@
       <ProjectReference Include="..\FullTextsearch\FullTextsearch.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="QueryManager\WordFinder\" />
+    </ItemGroup>
+
 </Project>

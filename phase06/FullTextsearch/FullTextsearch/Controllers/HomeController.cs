@@ -1,17 +1,5 @@
-﻿using FullTextsearch.Context;
-using FullTextsearch.Document;
-using FullTextsearch.Document.Extractor;
-using FullTextsearch.Document.Formater;
-using FullTextsearch.Factory.FolderFactory;
-using FullTextsearch.Factory.SearchFactory;
-using FullTextsearch.Initialize;
-using FullTextsearch.InvertedIndex;
-using FullTextsearch.QueryManager.WordFinder;
-using FullTextsearch.QueryModel;
-using FullTextsearch.SearchManager;
-using FullTextsearch.SearchManager.ResultList;
-using FullTextsearch.SearchManager.SignedSearchManager;
-using FullTextsearch.Service;
+﻿
+using FullTextsearch.Service.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FullTextsearch.Controllers;

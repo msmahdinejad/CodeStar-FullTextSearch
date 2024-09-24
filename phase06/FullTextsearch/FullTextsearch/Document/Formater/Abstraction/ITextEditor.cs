@@ -1,4 +1,4 @@
-﻿namespace FullTextsearch.Document.Formater;
+﻿namespace FullTextsearch.Document.Formater.Abstraction;
 
 public interface ITextEditor
 {

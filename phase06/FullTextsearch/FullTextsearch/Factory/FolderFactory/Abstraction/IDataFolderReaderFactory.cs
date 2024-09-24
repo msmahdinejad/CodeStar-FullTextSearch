@@ -1,6 +1,7 @@
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 
-namespace FullTextsearch.Factory.FolderFactory;
+namespace FullTextsearch.Factory.FolderFactory.Abstraction;
 
 public interface IDataFolderReaderFactory
 {

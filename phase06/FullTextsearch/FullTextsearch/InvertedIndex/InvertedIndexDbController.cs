@@ -1,6 +1,9 @@
 ﻿using FullTextsearch.Context;
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Document.Extractor;
+using FullTextsearch.Document.Extractor.Abstraction;
+using FullTextsearch.InvertedIndex.Abstraction;
 using FullTextsearch.Model;
 
 namespace FullTextsearch.InvertedIndex;

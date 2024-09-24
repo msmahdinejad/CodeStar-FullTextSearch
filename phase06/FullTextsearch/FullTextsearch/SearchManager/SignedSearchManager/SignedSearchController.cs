@@ -1,8 +1,11 @@
-using FullTextsearch.Document;
-using FullTextsearch.InvertedIndex;
-using FullTextsearch.QueryManager.WordFinder;
-using FullTextsearch.QueryModel;
+using FullTextsearch.Document.Abstraction;
+using FullTextsearch.InvertedIndex.Abstraction;
+using FullTextsearch.QueryModel.Abstraction;
+using FullTextsearch.SearchManager.Abstraction;
 using FullTextsearch.SearchManager.ResultList;
+using FullTextsearch.SearchManager.ResultList.Abstraction;
+using FullTextsearch.WordFinder;
+using FullTextsearch.WordFinder.Abstraction;
 
 namespace FullTextsearch.SearchManager.SignedSearchManager;
 

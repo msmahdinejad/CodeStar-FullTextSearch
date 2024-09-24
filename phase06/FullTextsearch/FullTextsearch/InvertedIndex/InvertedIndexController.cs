@@ -1,5 +1,8 @@
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Document.Extractor;
+using FullTextsearch.Document.Extractor.Abstraction;
+using FullTextsearch.InvertedIndex.Abstraction;
 
 namespace FullTextsearch.InvertedIndex;
 

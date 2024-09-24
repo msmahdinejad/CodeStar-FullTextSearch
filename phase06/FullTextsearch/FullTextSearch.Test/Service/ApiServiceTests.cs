@@ -1,6 +1,9 @@
 ﻿using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Initialize;
+using FullTextsearch.Initialize.Abstarction;
 using FullTextsearch.QueryModel;
+using FullTextsearch.QueryModel.Abstraction;
 using FullTextsearch.Service;
 using Microsoft.AspNetCore.Http;
 using Moq;
@@ -9,7 +12,7 @@ namespace FullTextSearch.Test.Service;
 
 public class ApiServiceTests
 {
-    private readonly ApiService _sut; // System Under Test
+    private readonly ApiService _sut;
     private readonly Mock<ISearchInitializer> _searchInitializerMock;
 
     public ApiServiceTests()

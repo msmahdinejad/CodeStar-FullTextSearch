@@ -1,7 +1,6 @@
-﻿using FullTextsearch.Document;
-using FullTextsearch.Initialize;
+﻿using FullTextsearch.Document.Abstraction;
 
-namespace FullTextsearch.Service;
+namespace FullTextsearch.Service.Abstraction;
 
 public interface IApiService
 {

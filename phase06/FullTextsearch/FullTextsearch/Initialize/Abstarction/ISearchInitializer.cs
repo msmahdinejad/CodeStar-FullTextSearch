@@ -1,8 +1,8 @@
-﻿using FullTextsearch.Document;
-using FullTextsearch.QueryModel;
+﻿using FullTextsearch.Document.Abstraction;
+using FullTextsearch.QueryModel.Abstraction;
 using FullTextsearch.SearchManager;
 
-namespace FullTextsearch.Initialize;
+namespace FullTextsearch.Initialize.Abstarction;
 
 public interface ISearchInitializer
 {

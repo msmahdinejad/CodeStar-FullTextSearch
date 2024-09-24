@@ -1,7 +1,9 @@
 ﻿using FullTextsearch.Controllers;
 using FullTextsearch.Document;
+using FullTextsearch.Document.Abstraction;
 using FullTextsearch.Document.Formater;
 using FullTextsearch.Service;
+using FullTextsearch.Service.Abstraction;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -26,7 +28,7 @@ namespace FullTextSearch.Test.Controllers
             var queryText = "example";
             var searchResult = new HashSet<ISearchable>
             {
-                new Mock<ISearchable>().Object // Mock your ISearchable object appropriately
+                new Mock<ISearchable>().Object
             };
             _apiServiceMock.Setup(x => x.Search(queryText)).Returns(searchResult);
 
@@ -36,7 +38,7 @@ namespace FullTextSearch.Test.Controllers
             // Assert
             Assert.NotNull(result);
             Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
-            Assert.Single(result.Value as IEnumerable<string>); // Assuming GetValue() returns a string
+            Assert.Single(result.Value as IEnumerable<string>);
         }
 
         [Fact]
@@ -44,7 +46,7 @@ namespace FullTextSearch.Test.Controllers
         {
             // Arrange
             var queryText = "nonexistent";
-            var searchResult = new HashSet<ISearchable>(); // No results
+            var searchResult = new HashSet<ISearchable>();
             _apiServiceMock.Setup(x => x.Search(queryText)).Returns(searchResult);
 
             // Act
@@ -82,7 +84,7 @@ namespace FullTextSearch.Test.Controllers
         public async Task UploadFile_ShouldReturnBadRequest_WhenNoFileUploaded()
         {
             // Arrange
-            IFormFile fileMock = null; // No file
+            IFormFile fileMock = null; 
 
             // Act
             var result = await _controller.UploadFile(fileMock) as BadRequestObjectResult;

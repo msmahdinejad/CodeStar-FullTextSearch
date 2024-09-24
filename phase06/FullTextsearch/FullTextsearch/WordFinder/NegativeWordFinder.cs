@@ -1,4 +1,6 @@
-﻿namespace FullTextsearch.QueryManager.WordFinder;
+﻿using FullTextsearch.WordFinder.Abstraction;
+
+namespace FullTextsearch.WordFinder;
 
 public class NegativeWordFinder : IWordFinder
 {

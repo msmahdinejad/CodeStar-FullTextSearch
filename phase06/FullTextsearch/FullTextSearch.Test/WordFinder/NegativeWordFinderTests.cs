@@ -1,6 +1,6 @@
-﻿using FullTextsearch.QueryManager.WordFinder;
+﻿using FullTextsearch.WordFinder;
 
-namespace FullTextSearch.Test.QueryManager.WordFinder;
+namespace FullTextSearch.Test.WordFinder;
 
 public class NegativeWordFinderTests
 {

@@ -1,4 +1,4 @@
-namespace FullTextsearch.Document;
+namespace FullTextsearch.Document.Abstraction;
 
 public interface ISearchable
 {

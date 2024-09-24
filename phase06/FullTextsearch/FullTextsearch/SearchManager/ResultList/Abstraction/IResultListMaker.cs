@@ -1,7 +1,7 @@
-using FullTextsearch.Document;
-using FullTextsearch.InvertedIndex;
+using FullTextsearch.Document.Abstraction;
+using FullTextsearch.InvertedIndex.Abstraction;
 
-namespace FullTextsearch.SearchManager.ResultList;
+namespace FullTextsearch.SearchManager.ResultList.Abstraction;
 
 public interface IResultListMaker
 {

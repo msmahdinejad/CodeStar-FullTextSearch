@@ -1,26 +1,26 @@
-﻿using FullTextsearch.QueryManager.WordFinder;
+﻿using FullTextsearch.WordFinder;
 
-namespace FullTextSearch.Test.QueryManager.WordFinder;
+namespace FullTextSearch.Test.WordFinder;
 
-public class UnSignedWordFinderTests
+public class PositiveWordFinderTests
 {
     public static IEnumerable<object[]> FindWordsTestData()
     {
         yield return new object[]
         {
-            new[] { "apple", "banana", "cherry" },
+            new[] { "+apple", "+banana", "+cherry", "-date" },
             new HashSet<string> { "apple", "banana", "cherry" }
         };
 
         yield return new object[]
         {
-            new[] { "+apple", "-banana", "cherry" },
-            new HashSet<string> { "cherry" }
+            new[] { "+apple", "-banana", "+cherry", "date" },
+            new HashSet<string> { "apple", "cherry" }
         };
 
         yield return new object[]
         {
-            new[] { "+apple", "-banana", "+cherry" },
+            new[] { "-apple", "-banana", "-cherry" },
             new HashSet<string>()
         };
 
@@ -32,17 +32,17 @@ public class UnSignedWordFinderTests
 
         yield return new object[]
         {
-            new[] { "+", "-", "+apple", "-banana" },
-            new HashSet<string>()
+            new[] { "+", "+apple", "+banana", "-cherry" },
+            new HashSet<string> { "", "apple", "banana" }
         };
     }
 
     [Theory]
     [MemberData(nameof(FindWordsTestData))]
-    public void FindWords_InputQuery_ReturnsUnSignedWords(string[] input, HashSet<string> expected)
+    public void FindWords_InputQuery_ReturnsPositiveWords(string[] input, HashSet<string> expected)
     {
         //Arrange
-        var unSignedWordFinder = new UnsignedWordFinder();  
+        var unSignedWordFinder = new PositiveWordFinder();  
         
         // Act
         var result = unSignedWordFinder.FindWords(input);

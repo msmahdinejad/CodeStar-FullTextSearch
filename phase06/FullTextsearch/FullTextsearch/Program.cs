@@ -1,20 +1,25 @@
 using FullTextsearch.Context;
 using FullTextsearch.Document.Extractor;
+using FullTextsearch.Document.Extractor.Abstraction;
 using FullTextsearch.Document.Formater;
+using FullTextsearch.Document.Formater.Abstraction;
 using FullTextsearch.Factory.SearchFactory;
+using FullTextsearch.Factory.SearchFactory.Abstraction;
 using FullTextsearch.Initialize;
+using FullTextsearch.Initialize.Abstarction;
 using FullTextsearch.InvertedIndex;
-using FullTextsearch.QueryManager.WordFinder;
-using FullTextsearch.SearchManager;
+using FullTextsearch.InvertedIndex.Abstraction;
+using FullTextsearch.SearchManager.Abstraction;
 using FullTextsearch.SearchManager.ResultList;
+using FullTextsearch.SearchManager.ResultList.Abstraction;
 using FullTextsearch.SearchManager.SignedSearchManager;
 using FullTextsearch.Service;
+using FullTextsearch.Service.Abstraction;
+using FullTextsearch.WordFinder;
+using FullTextsearch.WordFinder.Abstraction;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,8 +29,6 @@ AddDb(builder);
 AddDi(builder);
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -59,11 +62,4 @@ void AddDi(WebApplicationBuilder builder)
     builder.Services.AddSingleton<ISearchController, SignedSearchController>();
     builder.Services.AddScoped<ISearchInitializer, SearchInitializer>();
     builder.Services.AddScoped<IApiService, ApiService>();
-}
-
-namespace FullTextsearch
-{
-    public partial class Program
-    {
-    }
 }
