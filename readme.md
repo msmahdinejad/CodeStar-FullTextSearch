@@ -1,6 +1,6 @@
 # CodeStar-Summer1403-SE-Team02
 
-This repository is part of the CodeStar Bootcamp 1403 organized by Mohimian. The exercises focused on the following learning outcomes:
+This repository is part of the CodeStar Summer 2024 Bootcamp organized by Mohaymen. The exercises focused on the following learning outcomes:
 
 - C#
 - Clean Code
@@ -45,7 +45,7 @@ In Phase 06, the project transitions to the **ASP.Net** framework and introduces
 
 ## Conclusion
 
-This project exemplifies the application of advanced programming concepts and tools, providing a solid foundation in full-stack development with a focus on search functionality and database management.
+This project demonstrates the application of advanced programming concepts and tools, highlighting capabilities in document searching, indexing, and database management.
 
 ---
 
