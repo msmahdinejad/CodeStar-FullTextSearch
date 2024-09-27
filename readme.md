@@ -51,5 +51,5 @@ This project exemplifies the application of advanced programming concepts and to
 
 ## Collaborators
 This project was developed by:
-- Mohammad Saleh Mahdinjead ([Link](https://github.com/msmahdinejad))
-- Kimia Kabiri ([Link](https://github.com/K-Kabiri))
+- [Mohammad Saleh Mahdinjead](https://github.com/msmahdinejad)
+- [Kimia Kabiri](https://github.com/K-Kabiri)
